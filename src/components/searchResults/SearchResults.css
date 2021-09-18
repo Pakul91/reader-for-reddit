@@ -1,0 +1,21 @@
+/* 
+Color for panels: #F9F7FA
+Color for background: #E0DEE0
+Color for shadows: #BAB8BA
+
+*/
+
+.searchResults-container {
+  width: 70%;
+  height: 100%;
+  margin: 1rem 1% 0 1%;
+  padding: 0.5rem;
+}
+
+.searchResult-container {
+  background-color: #f9f7fa;
+  box-shadow: 0.5rem 0.5rem 0.3rem #bab8ba;
+  border-radius: 0.2rem;
+  margin: 0 0.5rem 0.5rem 0.5rem;
+  padding: 0.5rem;
+}

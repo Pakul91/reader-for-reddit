@@ -1,0 +1,38 @@
+/* 
+Color for panels: #F9F7FA
+Color for background: #E0DEE0
+Color for shadows: #BAB8BA
+
+*/
+
+.searchBar-container {
+  position: absolute;
+  /* move to the center in x */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+form {
+  display: flex;
+  align-items: center;
+}
+.input-box {
+  font-size: 0.75rem;
+  width: 12rem;
+  height: 1.5rem;
+  border-radius: 0.3rem;
+  box-shadow: 1;
+  padding-left: 0.5rem;
+}
+
+.btn-submit {
+  height: 1rem;
+  padding: 0.25rem;
+  margin-left: 0.2rem;
+
+  transition: all 0.5s ease-in;
+}
+
+.btn-submit:hover {
+  transform: rotate(20deg);
+}
