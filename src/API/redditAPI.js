@@ -5,7 +5,7 @@
 
 const rootURL = "https://www.reddit.com/";
 
-const serchForSubreddit = async function (term = "popular") {
+const searchForSubreddit = async function (term = "popular") {
   try {
     const endpoint = `search.json?q=${term}&type=sr%2Cuser`;
     const response = await fetch(`${rootURL}${endpoint}`);
@@ -16,7 +16,7 @@ const serchForSubreddit = async function (term = "popular") {
   }
 };
 
-const serchForPosts = async function (term = "popular") {
+const searchForPosts = async function (term = "popular") {
   try {
     const endpoint = `search.json?q=${term}&type=link&sort=top`;
     const response = await fetch(`${rootURL}${endpoint}`);
@@ -40,4 +40,4 @@ const loadSubreddit = async function (subreddit) {
   }
 };
 
-export { serchForPosts, serchForSubreddit, loadSubreddit };
+export { searchForPosts, searchForSubreddit, loadSubreddit };

@@ -20,8 +20,9 @@ Color for shadows and hoover: #BAB8BA
 }
 
 .subreddit-container {
+  display: flex;
   margin: 0.4rem;
-  padding: 0.2rem;
+  padding: 0.5rem;
   border-radius: 0.2rem;
 }
 
@@ -32,4 +33,17 @@ Color for shadows and hoover: #BAB8BA
 
 .subreddit-container:hover {
   background-color: #bab8ba;
+  cursor: pointer;
+}
+
+.subreddit-img {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  padding-right: 0.5rem;
+}
+
+.subreddit-img img {
+  width: 100%;
+  border-radius: 50%;
 }

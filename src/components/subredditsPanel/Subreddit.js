@@ -1,5 +1,12 @@
 import React from "react";
 
-export function Subreddit() {
-  return <div className="subreddit-container"> Subreddit to display!</div>;
+export function Subreddit({ subreddit }) {
+  return (
+    <div className={`subreddit-container ${subreddit.active ? "active" : ""}`}>
+      <div className="subreddit-img">
+        <img src={subreddit.img} alt="" />
+      </div>
+      <span>{subreddit.name}</span>
+    </div>
+  );
 }
