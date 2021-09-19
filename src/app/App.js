@@ -5,10 +5,7 @@ import { Header } from "../components/header/Header";
 import { SearchResults } from "../components/searchResults/SearchResults";
 import { SubredditsPanel } from "../components/subredditsPanel/SubredditsPanel";
 
-import { searchForSubreddit } from "../API/redditAPI";
-
 function App() {
-  searchForSubreddit("reactjs");
   return (
     <div className="app-container">
       <Header />
