@@ -10,7 +10,7 @@ const searchForSubreddit = async function (term = "popular") {
     const endpoint = `search.json?q=${term}&type=sr%2Cuser`;
     const response = await fetch(`${rootURL}${endpoint}`);
     const data = await response.json();
-    console.log(data);
+    return data;
   } catch (error) {
     return error.message;
   }
@@ -21,7 +21,8 @@ const searchForPosts = async function (term = "popular") {
     const endpoint = `search.json?q=${term}&type=link&sort=top`;
     const response = await fetch(`${rootURL}${endpoint}`);
     const data = await response.json();
-    console.log(data);
+
+    return data;
   } catch (error) {
     return error.message;
   }
@@ -34,7 +35,7 @@ const loadSubreddit = async function (subreddit) {
     const endpoint = `/r/${subreddit}.json`;
     const response = await fetch(`${rootURL}${endpoint}`);
     const data = await response.json();
-    console.log(data);
+    return data;
   } catch (error) {
     return error.message;
   }
