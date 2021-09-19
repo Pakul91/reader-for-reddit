@@ -15,7 +15,7 @@ export const loadPostBySearchTerm = createAsyncThunk(
         subreddit: data.subreddit,
         subredditId: data.subreddit_id,
         title: data.title,
-        thumbnai: data.thumbnail,
+        thumbnail: data.thumbnail,
         ups: data.ups,
         mediaURL: data.url,
         permalink: data.permalink,

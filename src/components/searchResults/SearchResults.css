@@ -13,9 +13,59 @@ Color for shadows: #BAB8BA
 }
 
 .searchResult-container {
+  display: flex;
+  height: 4rem;
+
   background-color: #f9f7fa;
   box-shadow: 0.5rem 0.5rem 0.3rem #bab8ba;
   border-radius: 0.2rem;
   margin: 0 0.5rem 0.5rem 0.5rem;
   padding: 0.5rem;
+}
+
+.searchResult-container > * {
+  align-items: center;
+}
+
+.ups {
+  flex-shrink: 0;
+  background-color: #e0dee0;
+  font-size: 0.5rem;
+  font-weight: 700;
+  width: 1.75rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumbnail-container {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 4rem;
+  flex-shrink: 0;
+  padding: 0 0.5rem;
+}
+
+.thumbnail-container img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.content-container {
+  flex: 1 1 0;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 0.75rem;
+}
+
+.date-stamp {
+  font-size: 0.5rem;
 }
