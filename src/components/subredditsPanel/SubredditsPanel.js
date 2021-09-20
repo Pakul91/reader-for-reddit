@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectSubreddits } from "./subredditsSlice";
 import { Subreddit } from "./Subreddit";
-
 import "./SubredditsPanel.css";
 
 export function SubredditsPanel() {

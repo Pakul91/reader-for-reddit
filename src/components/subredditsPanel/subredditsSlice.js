@@ -19,13 +19,21 @@ const subredditsSlice = createSlice({
       name: "ffxiv",
       id: "2rgs7",
       img: "https://b.thumbs.redditmedia.com/nBTVKwioFs8qMyW6FO38S5MybIUOAKUovjsGgrkNN_U.png",
-      active: true,
+      active: false,
     },
   ],
   reducers: {
-    addSubreddit: (state, action) => {},
+    setAllInactive: (state) => {
+      state.map((subreddit) => (subreddit.active = false));
+    },
+    setActiveById: (state, action) => {
+      state.map((subreddit) =>
+        subreddit.id === action.payload ? (subreddit.active = true) : ""
+      );
+    },
   },
 });
 
+export const { setAllInactive, setActiveById } = subredditsSlice.actions;
 export const selectSubreddits = (state) => state.subreddits;
 export default subredditsSlice.reducer;

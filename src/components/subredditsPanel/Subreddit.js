@@ -1,8 +1,21 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { loadPosts } from "../searchResults/searchResultsSlice";
+import { setActiveById, setAllInactive } from "./subredditsSlice";
 
 export function Subreddit({ subreddit }) {
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(setAllInactive());
+    dispatch(setActiveById(subreddit.id));
+  };
+
   return (
-    <div className={`subreddit-container ${subreddit.active ? "active" : ""}`}>
+    <div
+      className={`subreddit-container ${subreddit.active ? "active" : ""}`}
+      onClick={handleClick}
+    >
       <div className="subreddit-img">
         <img src={subreddit.img} alt="" />
       </div>
