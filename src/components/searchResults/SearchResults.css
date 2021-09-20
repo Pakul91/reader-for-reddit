@@ -75,3 +75,6 @@ Color for shadows: #BAB8BA
   margin-top: 0.2rem;
   font-size: 0.5rem;
 }
+
+@media screen and (max-width: 320px) {
+}

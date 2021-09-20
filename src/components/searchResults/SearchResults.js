@@ -15,10 +15,13 @@ export function SearchResults() {
 
   return (
     <div className="searchResults-container">
+      {/* If loading render spinner */}
       {loading && <LoadingSpinner />}
-      {posts.map((post) => {
-        return <SearchResult key={post.id} post={post} />;
-      })}
+      {/* If not loading render results */}
+      {!loading &&
+        posts.map((post) => {
+          return <SearchResult key={post.id} post={post} />;
+        })}
     </div>
   );
 }
