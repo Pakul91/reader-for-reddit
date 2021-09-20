@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { act } from "react-dom/test-utils";
 import { fetchData } from "../../API/redditAPI";
 import { formatPosts } from "../../HELPERS";
 
@@ -56,7 +57,12 @@ const searchResultsSlice = createSlice({
     isLoadingSubreddits: false,
     failedToLoadSubreddits: false,
   },
-  reducers: {},
+  reducers: {
+    //Toggle clicked detailed view. Will accept post ID as action.payload
+    toggleDatailedViewById: (state, action) => {
+      console.log(action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loadPosts.pending, (state) => {
@@ -75,12 +81,17 @@ const searchResultsSlice = createSlice({
   },
 });
 
-//Post selector
+//Post selectors
 export const selectSearchedPosts = (state) => state.searchResults.posts;
 export const selectIsLoadingPosts = (state) =>
   state.searchResults.isLoadingPosts;
 
-//Subreddits selector
+//Subreddits selectors
 export const selectSearchedSubreddits = (state) =>
   state.searchResults.subreddits;
+
+//Action creators exports
+export const { toggleDatailedViewById } = searchResultsSlice.actions;
+
+//Reducer export
 export default searchResultsSlice.reducer;
