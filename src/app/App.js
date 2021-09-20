@@ -6,13 +6,13 @@ import "./App.css";
 import { Header } from "../components/header/Header";
 import { SearchResults } from "../components/searchResults/SearchResults";
 import { SubredditsPanel } from "../components/subredditsPanel/SubredditsPanel";
-import { loadPostBySearchTerm } from "../components/searchResults/searchResultsSlice";
+import { loadPosts } from "../components/searchResults/searchResultsSlice";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(loadPostBySearchTerm("cats"));
-  }, []);
+    dispatch(loadPosts({ term: "hot", type: "category" }));
+  }, [dispatch]);
 
   return (
     <div className="app-container">

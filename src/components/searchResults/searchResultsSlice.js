@@ -10,17 +10,34 @@ import { formatPosts } from "../../HELPERS";
 // search for posts
 // const endpoint = `search.json?q=${term}&type=link`;
 
-// load specific subreddit:
-// const endpoint = `/r/${subreddit}.json`;
+// load specific subreddit posts:
+// const endpoint = `r/${subreddit}.json`;
 
 // serch for top categories (hot/new/top(for today)/rising):
 // const endpoint = `${category}.json`;
 
-// Load post by search term using fetchData() from API module.
-export const loadPostBySearchTerm = createAsyncThunk(
+/*
+Load posts will accept and object:
+{
+  term: search term/category/subreddit name provided ('category' will accept hot/new/top/rising), 
+  type: specyfies what endpoint to use (will accept searchTerm/category/subredditPosts )
+}
+*/
+export const loadPosts = createAsyncThunk(
   "searchResults/loadPostBySearchTerm",
-  async (term) => {
-    const endpoint = `search.json?q=${term}&type=link`;
+  async ({ term, type }) => {
+    let endpoint;
+
+    if (type === "searchTerm") {
+      endpoint = `search.json?q=${term}&type=link`;
+    }
+    if (type === "category") {
+      endpoint = `${term}.json`;
+    }
+    if (type === "subredditPosts") {
+      endpoint = `r/${term}.json`;
+    }
+
     const posts = await fetchData(endpoint);
 
     return formatPosts(posts);
@@ -40,16 +57,16 @@ const searchResultsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(loadPostBySearchTerm.pending, (state) => {
+      .addCase(loadPosts.pending, (state) => {
         state.isLoadingPosts = true;
         state.failedToLoadPosts = false;
       })
-      .addCase(loadPostBySearchTerm.fulfilled, (state, action) => {
+      .addCase(loadPosts.fulfilled, (state, action) => {
         state.isLoadingPosts = false;
         state.failedToLoadPosts = false;
         state.posts = action.payload;
       })
-      .addCase(loadPostBySearchTerm.rejected, (state) => {
+      .addCase(loadPosts.rejected, (state) => {
         state.isLoadingPosts = false;
         state.failedToLoadPosts = true;
       });
@@ -58,6 +75,9 @@ const searchResultsSlice = createSlice({
 
 //Post selector
 export const selectSearchedPosts = (state) => state.searchResults.posts;
+export const selectIsLoadingPosts = (state) =>
+  state.searchResults.isLoadingPosts;
+
 //Subreddits selector
 export const selectSearchedSubreddits = (state) =>
   state.searchResults.subreddits;
