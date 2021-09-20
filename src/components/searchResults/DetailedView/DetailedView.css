@@ -6,13 +6,17 @@ Color for shadows: #BAB8BA
 */
 
 .details-container {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
   position: fixed;
   top: 50%;
   left: 50%;
 
   z-index: 1010;
   width: 80%;
-  min-height: 20%;
   transform: translate(-50%, -50%);
 
   background: #f9f7fa;
@@ -31,4 +35,8 @@ Color for shadows: #BAB8BA
 
   background: #e0dee0;
   opacity: 0.6;
+}
+
+img {
+  max-width: 80%;
 }

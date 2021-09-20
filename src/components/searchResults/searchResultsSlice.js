@@ -39,6 +39,8 @@ export const loadPosts = createAsyncThunk(
     }
 
     const posts = await fetchData(endpoint);
+
+    console.log(posts.data.children);
     //expect Object as returned value
     return formatPosts(posts);
   }
