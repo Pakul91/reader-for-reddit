@@ -7,6 +7,7 @@ Color for shadows: #BAB8BA
 
 html,
 body {
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
   font-size: 24px;
@@ -24,4 +25,6 @@ h2 {
 
 main {
   display: flex;
+  flex-wrap: wrap-reverse;
+  height: auto;
 }

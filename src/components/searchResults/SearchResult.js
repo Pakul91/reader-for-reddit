@@ -1,18 +1,9 @@
 import React from "react";
 import "./SearchResults.css";
 import textIcon from "../../media/textIcon.png";
+import { formatTime, formatUps } from "../../HELPERS";
 
 export function SearchResult({ post }) {
-  const formatUps = function ({ ups }) {
-    if (ups < 1000) return ups;
-
-    const thousands = Math.floor(ups / 1000);
-    const decimal = Math.floor((ups % 1000) / 100);
-    console.log(decimal);
-    const display = `${thousands}${decimal ? `.${decimal}` : ""}k`;
-    return display;
-  };
-  const formatTime = function ({ created }) {};
   return (
     <div className="searchResult-container">
       <div className="ups">{formatUps(post)}</div>
@@ -28,7 +19,7 @@ export function SearchResult({ post }) {
       </div>
       <div className="content-container">
         <p className="title">{post.title}</p>
-        <span className="date-stamp">Posted: {post.created} ago.</span>
+        <span className="date-stamp">Posted: {formatTime(post)} ago.</span>
       </div>
     </div>
   );

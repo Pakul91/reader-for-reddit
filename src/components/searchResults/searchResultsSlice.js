@@ -1,31 +1,29 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { searchForPosts } from "../../API/redditAPI";
+import { fetchData } from "../../API/redditAPI";
+import { formatPosts } from "../../HELPERS";
 
-// Load post by search term using searchForPosts() from API module.
+// ========== ENDPOINTS FOR FETCHING ============
+
+// search for subreddits
+// const endpoint = `search.json?q=${term}&type=sr%2Cuser`;
+
+// search for posts
+// const endpoint = `search.json?q=${term}&type=link`;
+
+// load specific subreddit:
+// const endpoint = `/r/${subreddit}.json`;
+
+// serch for top categories (hot/new/top(for today)/rising):
+// const endpoint = `${category}.json`;
+
+// Load post by search term using fetchData() from API module.
 export const loadPostBySearchTerm = createAsyncThunk(
   "searchResults/loadPostBySearchTerm",
   async (term) => {
-    const posts = await searchForPosts(term);
-    // Format and return retrieved data
-    const formatedPosts = posts.data.children.map(({ data }) => {
-      return {
-        id: data.id,
-        author: data.author,
-        created: data.created,
-        subreddit: data.subreddit,
-        subredditId: data.subreddit_id,
-        title: data.title,
-        thumbnail: data.thumbnail,
-        ups: data.ups,
-        mediaURL: data.url,
-        permalink: data.permalink,
-        text: data.selftext,
-        datailedView: false,
-      };
-    });
+    const endpoint = `search.json?q=${term}&type=link`;
+    const posts = await fetchData(endpoint);
 
-    console.log(formatedPosts);
-    return formatedPosts;
+    return formatPosts(posts);
   }
 );
 

@@ -11,8 +11,7 @@ import { loadPostBySearchTerm } from "../components/searchResults/searchResultsS
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("loaded");
-    dispatch(loadPostBySearchTerm("popular"));
+    dispatch(loadPostBySearchTerm("cats"));
   }, []);
 
   return (

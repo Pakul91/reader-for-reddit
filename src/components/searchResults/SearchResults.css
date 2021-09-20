@@ -6,25 +6,30 @@ Color for shadows: #BAB8BA
 */
 
 .searchResults-container {
-  width: 70%;
-  height: 100%;
+  flex: 1 1 70%;
   margin: 1rem 1% 0 1%;
-  padding: 0.5rem;
 }
 
 .searchResult-container {
   display: flex;
   height: 4rem;
-
   background-color: #f9f7fa;
   box-shadow: 0.5rem 0.5rem 0.3rem #bab8ba;
   border-radius: 0.2rem;
   margin: 0 0.5rem 0.5rem 0.5rem;
   padding: 0.5rem;
+  transition: all 0.3s;
 }
 
 .searchResult-container > * {
   align-items: center;
+}
+
+.searchResult-container:hover {
+  z-index: 10;
+  transform: translateY(0.1rem);
+  cursor: pointer;
+  box-shadow: 0.5rem 0.5rem 0.3rem rgb(100, 99, 99);
 }
 
 .ups {
@@ -55,17 +60,18 @@ Color for shadows: #BAB8BA
 
 .content-container {
   flex: 1 1 0;
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
 }
 
 .title {
   flex-grow: 1;
-  text-align: center;
+  align-self: flex-start;
   font-size: 0.75rem;
+  overflow-y: hidden;
 }
 
 .date-stamp {
+  margin-top: 0.2rem;
   font-size: 0.5rem;
 }

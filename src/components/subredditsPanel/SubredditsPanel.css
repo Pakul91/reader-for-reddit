@@ -6,22 +6,23 @@ Color for shadows and hoover: #BAB8BA
 */
 
 .subredditPanel-container {
-  box-sizing: border-box;
+  flex: 1 1 20%;
+  align-self: flex-end;
+  height: fit-content;
   background-color: #f9f7fa;
   box-shadow: 0.5rem 0.5rem 0.3rem #bab8ba;
   border-radius: 0.2rem;
-  width: 25%;
-  margin-top: 1rem;
+  margin: 1rem 0;
   margin-right: 2%;
 }
 
 .subredditPanel-container h2 {
-  padding-left: 0.5rem;
+  padding-left: 0.75rem;
 }
 
 .subreddit-container {
   display: flex;
-  margin: 0.4rem;
+  margin: 0.2rem 0.4rem;
   padding: 0.5rem;
   border-radius: 0.2rem;
 }

@@ -1,13 +1,19 @@
 // search for subreddits: search.json?q={TERM_WITHOUT_SPACE_HERE}&type=sr%2Cuser
-// search for posts: search.json?q={TERM_WITHOUT_SPACE_HERE}&type=link&sort=top
+// const endpoint = `search.json?q=${term}&type=sr%2Cuser`;
+
+// search for posts: search.json?q={TERM_WITHOUT_SPACE_HERE}&type=link
+// const endpoint = `search.json?q=${term}&type=link`;
+
 // load specific user/subreddit: /r/${SUBREDDIT_NAME_HERE}.json
-//
+// const endpoint = `/r/${subreddit}.json`;
+
+// load hot/new/top(for today)/rising: {CATEGORY_IN_HERE}.json
+// const endpoint = `/{}`;
 
 const rootURL = "https://www.reddit.com/";
 
-const searchForSubreddit = async function (term = "popular") {
+export const fetchData = async function (endpoint) {
   try {
-    const endpoint = `search.json?q=${term}&type=sr%2Cuser`;
     const response = await fetch(`${rootURL}${endpoint}`);
     const data = await response.json();
     return data;
@@ -15,30 +21,3 @@ const searchForSubreddit = async function (term = "popular") {
     return error.message;
   }
 };
-
-const searchForPosts = async function (term = "popular") {
-  try {
-    const endpoint = `search.json?q=${term}&type=link&sort=top`;
-    const response = await fetch(`${rootURL}${endpoint}`);
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    return error.message;
-  }
-};
-
-const loadSubreddit = async function (subreddit) {
-  if (!subreddit) return;
-
-  try {
-    const endpoint = `/r/${subreddit}.json`;
-    const response = await fetch(`${rootURL}${endpoint}`);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    return error.message;
-  }
-};
-
-export { searchForPosts, searchForSubreddit, loadSubreddit };
