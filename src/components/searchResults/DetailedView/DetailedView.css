@@ -1,0 +1,34 @@
+/* 
+Color for panels: #F9F7FA
+Color for background: #E0DEE0
+Color for shadows: #BAB8BA
+
+*/
+
+.details-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  z-index: 1010;
+  width: 80%;
+  min-height: 20%;
+  transform: translate(-50%, -50%);
+
+  background: #f9f7fa;
+  border-radius: 0.2rem;
+  box-shadow: 0.5rem 0.5rem 0.3rem #bab8ba;
+}
+
+.overlay {
+  z-index: 1000;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: #e0dee0;
+  opacity: 0.6;
+}

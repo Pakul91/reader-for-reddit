@@ -19,7 +19,7 @@ export function SearchResults() {
       {loading && <LoadingSpinner />}
       {/* If not loading render results */}
       {!loading &&
-        posts.map((post) => {
+        Object.values(posts).map((post) => {
           return <SearchResult key={post.id} post={post} />;
         })}
     </div>

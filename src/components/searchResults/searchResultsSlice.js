@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { act } from "react-dom/test-utils";
 import { fetchData } from "../../API/redditAPI";
 import { formatPosts } from "../../HELPERS";
 
@@ -40,7 +39,7 @@ export const loadPosts = createAsyncThunk(
     }
 
     const posts = await fetchData(endpoint);
-
+    //expect Object as returned value
     return formatPosts(posts);
   }
 );
@@ -48,7 +47,7 @@ export const loadPosts = createAsyncThunk(
 const searchResultsSlice = createSlice({
   name: "serchResults",
   initialState: {
-    posts: [],
+    posts: {},
     subreddits: [],
     postsActive: true,
     subredditsActive: false,
@@ -60,7 +59,11 @@ const searchResultsSlice = createSlice({
   reducers: {
     //Toggle clicked detailed view. Will accept post ID as action.payload
     toggleDatailedViewById: (state, action) => {
-      console.log(action.payload);
+      const post = state.posts[action.payload];
+
+      post.detailedView
+        ? (post.detailedView = false)
+        : (post.detailedView = true);
     },
   },
   extraReducers: (builder) => {

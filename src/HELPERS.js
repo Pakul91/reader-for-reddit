@@ -41,24 +41,27 @@ export const formatTime = function ({ created }) {
   return minsPast > 1 ? `${minsPast} minutes` : `${minsPast} minute`;
 };
 
-// Take data from the post request and return formated one
+// Take data from the post request and return object with each post.id and key and post object as a body
 export const formatPosts = ({ data }) => {
-  const formatedPosts = data.children.map(({ data }) => {
-    return {
-      id: data.id,
-      author: data.author,
-      created: data.created,
-      subreddit: data.subreddit,
-      subredditId: data.subreddit_id,
-      title: data.title,
-      thumbnail: data.thumbnail,
-      ups: data.ups,
-      mediaURL: data.url,
-      permalink: data.permalink,
-      text: data.selftext,
-      datailedView: false,
-    };
-  });
+  const formatedPosts = {};
+
+  data.children.map(
+    ({ data }) =>
+      (formatedPosts[data.id] = {
+        id: data.id,
+        author: data.author,
+        created: data.created,
+        subreddit: data.subreddit,
+        subredditId: data.subreddit_id,
+        title: data.title,
+        thumbnail: data.thumbnail,
+        ups: data.ups,
+        mediaURL: data.url,
+        permalink: data.permalink,
+        text: data.selftext,
+        detailedView: false,
+      })
+  );
 
   return formatedPosts;
 };
