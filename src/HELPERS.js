@@ -60,6 +60,7 @@ export const formatPosts = ({ data }) => {
         permalink: data.permalink,
         text: data.selftext,
         detailedView: false,
+        brokenImg: false,
       })
   );
 
