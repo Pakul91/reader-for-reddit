@@ -9,6 +9,7 @@ export function Subreddit({ subreddit }) {
   const handleClick = () => {
     dispatch(setAllInactive());
     dispatch(setActiveById(subreddit.id));
+    dispatch(loadPosts({ term: subreddit.name, type: "subredditPosts" }));
   };
 
   return (

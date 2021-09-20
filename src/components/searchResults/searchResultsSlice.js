@@ -49,6 +49,8 @@ const searchResultsSlice = createSlice({
   initialState: {
     posts: [],
     subreddits: [],
+    postsActive: true,
+    subredditsActive: false,
     isLoadingPosts: false,
     failedToLoadPosts: false,
     isLoadingSubreddits: false,
