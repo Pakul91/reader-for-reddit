@@ -1,28 +1,9 @@
 /* 
 Color for panels: #F9F7FA
-Color for background: #E0DEE0
+Color for background: #E0DEE0  / rgba(224, 222, 224, 1)
 Color for shadows: #BAB8BA
 
 */
-
-.details-container {
-  display: flex;
-  flex-direction: column;
-
-  align-items: center;
-
-  position: fixed;
-  top: 50%;
-  left: 50%;
-
-  z-index: 1010;
-  width: 80%;
-  transform: translate(-50%, -50%);
-
-  background: #f9f7fa;
-  border-radius: 0.2rem;
-  box-shadow: 0.5rem 0.5rem 0.3rem #bab8ba;
-}
 
 .overlay {
   z-index: 1000;
@@ -33,10 +14,49 @@ Color for shadows: #BAB8BA
   width: 100%;
   height: 100%;
 
-  background: #e0dee0;
-  opacity: 0.6;
+  background: rgba(224, 222, 224, 0.9);
+  overflow-y: scroll;
 }
 
-img {
-  max-width: 80%;
+.details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: absolute;
+  top: 0;
+  left: 10%;
+
+  z-index: 1010;
+  width: 80%;
+  margin-top: 1vw;
+  padding-bottom: 2vw;
+
+  min-height: 40%;
+
+  background: #f9f7fa;
+  border-radius: 0.2rem;
+  box-shadow: 0.5rem 0.5rem 0.3rem #bab8ba;
+}
+
+.btn-exit {
+  align-self: flex-end;
+
+  border: 3px solid orange;
+  border-radius: 0.3rem;
+  margin: 0.5rem 0.5rem 0 0;
+}
+
+.btn-exit:hover {
+  cursor: pointer;
+}
+
+h2 {
+  margin: 0.5rem 1rem;
+  border: 1px solid red;
+}
+
+.img-post {
+  max-height: 70vw;
+  box-shadow: 0.5rem 0.5rem 0.3rem #bab8ba;
 }

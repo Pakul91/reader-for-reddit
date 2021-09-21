@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchData } from "../../API/redditAPI";
-import { formatPosts } from "../../HELPERS";
+import { formatPosts } from "../../Helpers/HELPERS";
 
 // ========== ENDPOINTS FOR FETCHING ============
 
@@ -40,7 +40,6 @@ export const loadPosts = createAsyncThunk(
 
     const posts = await fetchData(endpoint);
 
-    console.log(posts.data.children);
     //expect Object as returned value
     return formatPosts(posts);
   }

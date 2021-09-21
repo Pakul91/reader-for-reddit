@@ -5,7 +5,7 @@ import "./SearchResults.css";
 import textIcon from "../../media/textIcon.png";
 import { DetailedView } from "./DetailedView/DetailedView";
 // Functions
-import { formatTime, formatUps } from "../../HELPERS";
+import { formatTime, formatUps } from "../../Helpers/HELPERS";
 import { toggleDatailedViewById } from "./searchResultsSlice";
 
 //======================================

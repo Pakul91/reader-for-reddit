@@ -43,6 +43,7 @@ export const formatTime = function ({ created }) {
 
 // Take data from the post request and return object with each post.id and key and post object as a body
 export const formatPosts = ({ data }) => {
+  console.log(data);
   const formatedPosts = {};
 
   data.children.map(
@@ -56,13 +57,38 @@ export const formatPosts = ({ data }) => {
         title: data.title,
         thumbnail: data.thumbnail,
         ups: data.ups,
-        mediaURL: data.url,
+        imgURL: data.url,
         permalink: data.permalink,
         text: data.selftext,
         detailedView: false,
-        brokenImg: false,
+        // conditinally adding property:
+        ...(data.media &&
+          data.media.reddit_video && {
+            videoURL: data.media.reddit_video.fallback_url,
+          }),
+        ...(data.media &&
+          data.media.oembed && {
+            embededVid: data.media.oembed.html,
+          }),
       })
   );
 
+  console.log(formatedPosts);
   return formatedPosts;
 };
+
+// Check if provided url has an image extension
+export function isImg(url) {
+  if (!url) return false;
+  const imgUrl = url;
+  const regex = /\.(gif|jpe?g|tiff?|png|webp|bmp|gif)$/i;
+  return regex.test(imgUrl);
+}
+
+//format embeded video link
+export function formatEmbeded(link) {
+  if (!link) return;
+  const formatedLink = link.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
+
+  return formatedLink;
+}
