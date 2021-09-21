@@ -6,6 +6,7 @@
 //Use to convert Markdown to HTML
 
 export function markdown(src) {
+  console.log(src);
   var rx_lt = /</g;
   var rx_gt = />/g;
   var rx_space = /\t|\r|\uf8ff/g;
@@ -193,5 +194,6 @@ export function markdown(src) {
   });
 
   //   return src.trim();
+  console.log(src);
   return src;
 }

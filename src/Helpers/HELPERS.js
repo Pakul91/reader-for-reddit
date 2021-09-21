@@ -43,7 +43,6 @@ export const formatTime = function ({ created }) {
 
 // Take data from the post request and return object with each post.id and key and post object as a body
 export const formatPosts = ({ data }) => {
-  console.log(data);
   const formatedPosts = {};
 
   data.children.map(
@@ -73,7 +72,6 @@ export const formatPosts = ({ data }) => {
       })
   );
 
-  console.log(formatedPosts);
   return formatedPosts;
 };
 

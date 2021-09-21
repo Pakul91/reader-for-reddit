@@ -28,39 +28,49 @@ export function DetailedView({ post }) {
     <div>
       <div className="overlay">
         <div className="details-container">
-          <span className="btn-exit" onClick={handleClick}>
-            X
-          </span>
-          <h2>{post.title}</h2>
+          <div className="top-line">
+            <span className="author">{post.author}</span>
+            <span className="posted">{formatTime(post.created)} ago</span>
+
+            <span className="btn-exit" onClick={handleClick}>
+              X
+            </span>
+          </div>
+          <h2 className="h2-post">{post.title}</h2>
           {/* Display if there is a valid img link */}
           {checkImg && (
             <img className="img-post" src={post.imgURL} alt="media" />
           )}
+
           {/* Display video if there is any */}
           {post.videoURL && (
-            <video controls>
+            <video controls className="video-post">
               <source src={post.videoURL} />
+              Video not avaiable on your browser!😭
             </video>
           )}
+
           {/* Display embeded video if there is any */}
           <div
+            className="embeded-post"
             dangerouslySetInnerHTML={{ __html: formatEmbeded(post.embededVid) }}
           ></div>
-          {!checkImg ? (
-            <a href={post.imgURL} target="_blank">
-              <img src={linkIcon} alt="" />
-            </a>
-          ) : (
-            ""
-          )}
+
           {/* insert previously formated text */}
-          <div
-            dangerouslySetInnerHTML={{ __html: formatedText }}
-            className="post-text"
-          ></div>
-          <div></div>
-          <span>{post.author}</span>
-          <span>{formatTime(post.created)}</span>
+          <div className="text-post">
+            <div dangerouslySetInnerHTML={{ __html: formatedText }}></div>
+          </div>
+
+          {/* Link to oryginal content */}
+          <div className="link-oryginal">
+            <a href={post.imgURL} target="_blank" rel="noreferrer">
+              <img src={linkIcon} alt="" className="anchor-img" />
+            </a>
+
+            <a href={post.imgURL} target="_blank" rel="noreferrer">
+              Oryginal content
+            </a>
+          </div>
         </div>
       </div>
     </div>

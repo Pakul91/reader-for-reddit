@@ -39,24 +39,82 @@ Color for shadows: #BAB8BA
   box-shadow: 0.5rem 0.5rem 0.3rem #bab8ba;
 }
 
-.btn-exit {
-  align-self: flex-end;
+.top-line {
+  display: inline;
+  width: 100%;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid black;
+}
 
-  border: 3px solid orange;
+.author {
+  font-weight: 550;
+  margin-top: 1rem;
+  margin: 0.5rem 0.5rem 0 0.5rem;
+}
+
+.posted {
+  font-size: 0.75rem;
+}
+
+.btn-exit {
+  float: right;
+  border: 3px solid orangered;
   border-radius: 0.3rem;
-  margin: 0.5rem 0.5rem 0 0;
+  margin-right: 0.5rem;
 }
 
 .btn-exit:hover {
   cursor: pointer;
 }
 
-h2 {
-  margin: 0.5rem 1rem;
-  border: 1px solid red;
+.h2-post {
+  margin: 0.5rem 1rem 1rem 1rem;
+  font-weight: 550;
 }
 
-.img-post {
-  max-height: 70vw;
+.img-post,
+.video-post,
+.embeded-post {
+  max-width: 90%;
+  max-height: 90vh;
   box-shadow: 0.5rem 0.5rem 0.3rem #bab8ba;
+}
+
+.text-post {
+  max-width: 90%;
+  line-height: 1.6;
+}
+
+.text-post li {
+  list-style: inside;
+}
+
+.text-post ol,
+.text-post ul {
+  margin: 1rem;
+}
+
+.text-post strong {
+  font-weight: 550;
+}
+
+.link-oryginal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  margin-top: 1rem;
+  text-decoration: none;
+}
+.link-oryginal a {
+  margin-left: 0.3rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.anchor-img {
+  height: 1.5rem;
+  border: 3px solid orangered;
+  border-radius: 0.3rem;
 }
