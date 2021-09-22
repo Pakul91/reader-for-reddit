@@ -8,7 +8,10 @@ export function Header() {
     <div className="header-container">
       <div className="logo-container">
         <img src={logo} alt="logo"></img>
-        <span>Reader For Reddit</span>
+        <span className="name">
+          <span className="R">R</span>eader For <span className="R">R</span>
+          eddit
+        </span>
       </div>
       <SearchBar />
     </div>

@@ -2,9 +2,11 @@
 Color for panels: #F9F7FA
 Color for background: #E0DEE0  / rgba(224, 222, 224, 1)
 Color for shadows: #BAB8BA
+Clickable items : orangered / rgba(255,69,0,1)
 
 */
 
+/* Styles for overlay and main container */
 .overlay {
   z-index: 1000;
 
@@ -39,7 +41,8 @@ Color for shadows: #BAB8BA
   box-shadow: 0.5rem 0.5rem 0.3rem #bab8ba;
 }
 
-.top-line {
+/* Styles for top-bar and title */
+.top-bar {
   display: inline;
   width: 100%;
   padding: 0.5rem 0;
@@ -47,13 +50,15 @@ Color for shadows: #BAB8BA
 }
 
 .author {
+  font-size: 0.75rem;
   font-weight: 550;
+  color: orangered;
   margin-top: 1rem;
   margin: 0.5rem 0.5rem 0 0.5rem;
 }
 
 .posted {
-  font-size: 0.75rem;
+  font-size: 0.5rem;
 }
 
 .btn-exit {
@@ -61,17 +66,22 @@ Color for shadows: #BAB8BA
   border: 3px solid orangered;
   border-radius: 0.3rem;
   margin-right: 0.5rem;
+  padding: 0.1rem;
+  transition: 0.5s all;
 }
 
 .btn-exit:hover {
   cursor: pointer;
+  z-index: 1020;
+  transform: translateY(-0.1rem);
+  box-shadow: 0.1rem 0.1rem 0.3rem #bab8ba;
 }
 
 .h2-post {
   margin: 0.5rem 1rem 1rem 1rem;
   font-weight: 550;
 }
-
+/* Styles for media */
 .img-post,
 .video-post,
 .embeded-post {
@@ -80,6 +90,7 @@ Color for shadows: #BAB8BA
   box-shadow: 0.5rem 0.5rem 0.3rem #bab8ba;
 }
 
+/* Styles for formated text */
 .text-post {
   max-width: 90%;
   line-height: 1.6;
@@ -98,6 +109,7 @@ Color for shadows: #BAB8BA
   font-weight: 550;
 }
 
+/* Styles for link */
 .link-oryginal {
   display: flex;
   align-items: center;
@@ -117,4 +129,55 @@ Color for shadows: #BAB8BA
   height: 1.5rem;
   border: 3px solid orangered;
   border-radius: 0.3rem;
+  transition: 0.5s all;
+}
+
+.anchor-img:hover {
+  cursor: pointer;
+  z-index: 1020;
+  transform: translateY(-0.1rem);
+  box-shadow: 0.1rem 0.1rem 0.3rem #bab8ba;
+}
+
+/* Styles for bottom bar */
+.bottom-bar {
+  display: flex;
+  align-content: center;
+  justify-content: end;
+  width: 100%;
+  padding: 0.5rem 0;
+  border-top: 1px solid black;
+}
+.bottom-bar > * {
+  margin-right: 0.5rem;
+}
+
+.upvotes {
+  align-self: center;
+  justify-self: start;
+
+  font-size: 0.75rem;
+  float: right;
+}
+
+.comments {
+  display: flex;
+  align-items: center;
+
+  font-size: 0.75rem;
+  align-self: center;
+  float: left;
+  border: 3px solid orangered;
+  border-radius: 0.3rem;
+  transition: 0.5s all;
+}
+.comments:hover {
+  cursor: pointer;
+  z-index: 1020;
+  transform: translateY(-0.1rem);
+  box-shadow: 0.1rem 0.1rem 0.3rem #bab8ba;
+}
+
+.comments img {
+  height: 1.5rem;
 }

@@ -2,6 +2,7 @@
 Color for panels: #F9F7FA
 Color for background: #E0DEE0
 Color for shadows: #BAB8BA
+Clickable items : orangered / rgba(255,69,0,1)
 
 */
 
@@ -29,10 +30,14 @@ form {
   height: 1rem;
   padding: 0.25rem;
   margin-left: 0.2rem;
-
+  background-color: orangered;
+  border-radius: 50%;
   transition: all 0.5s ease-in;
 }
 
 .btn-submit:hover {
+  z-index: 20;
+  transform: translateY(-0.1rem);
   transform: rotate(20deg);
+  box-shadow: 0.1rem 0.1rem 0.3rem #bab8ba;
 }

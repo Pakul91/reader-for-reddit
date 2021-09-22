@@ -43,6 +43,7 @@ export const formatTime = function ({ created }) {
 
 // Take data from the post request and return object with each post.id and key and post object as a body
 export const formatPosts = ({ data }) => {
+  console.log(data);
   const formatedPosts = {};
 
   data.children.map(
@@ -81,6 +82,18 @@ export function isImg(url) {
   const imgUrl = url;
   const regex = /\.(gif|jpe?g|tiff?|png|webp|bmp|gif)$/i;
   return regex.test(imgUrl);
+}
+
+export function isVid(url) {
+  if (!url) return false;
+
+  //If video has gifv format replace it to mp4
+  let vidUrl = url.replaceAll("gifv", "mp4");
+
+  const regex = /\.(mp4|WebM|OGG)$/i;
+
+  //if video has valid format return link, in not return false
+  return regex.test(vidUrl) ? vidUrl : regex.test(vidUrl);
 }
 
 //format embeded video link

@@ -2,6 +2,7 @@
 Color for panels: #F9F7FA
 Color for background: #E0DEE0
 Color for shadows and hoover: #BAB8BA
+Clickable items : orangered / rgba(255,69,0,1)
 
 */
 
@@ -28,8 +29,8 @@ Color for shadows and hoover: #BAB8BA
 }
 
 .active {
-  border-left: 0.4rem solid black;
-  background-color: #e0dee0;
+  border-left: 0.4rem solid orangered;
+  background-color: rgba(255, 69, 0, 0.3);
 }
 
 .subreddit-container:hover {

@@ -14,19 +14,8 @@ function App() {
     dispatch(loadPosts({ term: "hot", type: "category" }));
   }, [dispatch]);
 
-  // const link = `<iframe
-  //     width="356"
-  //     height="200"
-  //     src="https://www.youtube.com/embed/K7Yn4m567sk?feature=oembed&amp;enablejsapi=1"
-  //     frameborder="0"
-  //     allow="accelerometer; autoplay; clipboard-write;
-  // encrypted-media; gyroscope; picture-in-picture"
-  //     allowfullscreen
-  //   ></iframe>`;
-
   return (
     <div className="app-container">
-      {/* <div dangerouslySetInnerHTML={{ __html: link }}></div> */}
       <Header />
       <main>
         <SearchResults />

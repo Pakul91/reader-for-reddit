@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import "./DetailedView.css";
 import linkIcon from "../../../media/linkIcon.png";
+import commentsIcon from "../../../media/commentsIcon.png";
 import { useDispatch } from "react-redux";
 import { toggleDatailedViewById } from "../../searchResults/searchResultsSlice";
 import {
   formatTime,
   formatUps,
   isImg,
+  isVid,
   formatEmbeded,
 } from "../../../Helpers/HELPERS";
 import { markdown } from "../../../Helpers/drawdown";
@@ -21,16 +23,20 @@ export function DetailedView({ post }) {
   //Format retrieved markdown text to HTML
   const formatedText = post.text ? markdown(post.text) : "";
 
-  //check if provided link is an img
+  //check if provided url is a valid image
   const checkImg = isImg(post.imgURL);
+
+  //check if provided url is a valid vidoe. If yes, return link if no return fals
+  const checkVid = isVid(post.imgURL);
+  console.log();
 
   return (
     <div>
       <div className="overlay">
         <div className="details-container">
-          <div className="top-line">
+          <div className="top-bar">
             <span className="author">{post.author}</span>
-            <span className="posted">{formatTime(post.created)} ago</span>
+            <span className="posted">{formatTime(post)} ago</span>
 
             <span className="btn-exit" onClick={handleClick}>
               X
@@ -40,6 +46,13 @@ export function DetailedView({ post }) {
           {/* Display if there is a valid img link */}
           {checkImg && (
             <img className="img-post" src={post.imgURL} alt="media" />
+          )}
+          {/* Display if there is a valid video link */}
+          {checkVid && (
+            <video controls className="video-post">
+              <source src={checkVid} />
+              Video not avaiable on your browser!😭
+            </video>
           )}
 
           {/* Display video if there is any */}
@@ -70,6 +83,13 @@ export function DetailedView({ post }) {
             <a href={post.imgURL} target="_blank" rel="noreferrer">
               Oryginal content
             </a>
+          </div>
+          <div className="bottom-bar">
+            <span className="upvotes">{formatUps(post)} ups</span>
+            <div className="comments">
+              <img src={commentsIcon} alt="comments" />
+              <span>xxx</span>
+            </div>
           </div>
         </div>
       </div>
