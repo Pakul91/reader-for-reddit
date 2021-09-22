@@ -28,9 +28,9 @@ form {
 
 .btn-submit {
   height: 1rem;
-  padding: 0.25rem;
+  padding: 0.15rem;
   margin-left: 0.2rem;
-  background-color: orangered;
+  border: 3px solid orangered;
   border-radius: 50%;
   transition: all 0.5s ease-in;
 }
