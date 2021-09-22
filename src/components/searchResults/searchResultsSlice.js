@@ -26,22 +26,26 @@ Load posts will accept and object:
 export const loadPosts = createAsyncThunk(
   "searchResults/loadPostBySearchTerm",
   async ({ term, type }) => {
-    let endpoint;
+    try {
+      let endpoint;
 
-    if (type === "searchTerm") {
-      endpoint = `search.json?q=${term}&type=link`;
-    }
-    if (type === "category") {
-      endpoint = `${term}.json`;
-    }
-    if (type === "subredditPosts") {
-      endpoint = `r/${term}.json`;
-    }
+      if (type === "searchTerm") {
+        endpoint = `search.json?q=${term}&type=link`;
+      }
+      if (type === "category") {
+        endpoint = `${term}.json`;
+      }
+      if (type === "subredditPosts") {
+        endpoint = `r/${term}.json`;
+      }
 
-    const posts = await fetchData(endpoint);
+      const posts = await fetchData(endpoint);
 
-    //expect Object as returned value
-    return formatPosts(posts);
+      //expect Object as returned value
+      return formatPosts(posts);
+    } catch (error) {
+      return error.message;
+    }
   }
 );
 

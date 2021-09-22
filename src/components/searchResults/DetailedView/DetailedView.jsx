@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./DetailedView.css";
 import linkIcon from "../../../media/linkIcon.png";
 import commentsIcon from "../../../media/commentsIcon.png";
 import { useDispatch } from "react-redux";
 import { toggleDatailedViewById } from "../../searchResults/searchResultsSlice";
+import { loadComments } from "./Comments/commentsSlice";
 import {
   formatTime,
   formatUps,
@@ -28,7 +29,10 @@ export function DetailedView({ post }) {
 
   //check if provided url is a valid vidoe. If yes, return link if no return fals
   const checkVid = isVid(post.imgURL);
-  console.log();
+
+  useEffect(() => {
+    dispatch(loadComments(post));
+  }, [dispatch, post]);
 
   return (
     <div>

@@ -18,6 +18,21 @@ export const fetchData = async function (endpoint) {
     const data = await response.json();
     return data;
   } catch (error) {
+    console.log(error.message);
+    return error.message;
+  }
+};
+
+//Load comments with provided permalink. Permalink is an endpoint for each posts comments
+export const fetchComments = async function (permalink) {
+  try {
+    console.log(`${rootURL}${permalink}.json`);
+    const response = await fetch(`${rootURL}${permalink}.json`);
+    const data = await response.json();
+    //data[1] contains some of the comments from the post
+    return data[1];
+  } catch (error) {
+    console.log(error.message);
     return error.message;
   }
 };
