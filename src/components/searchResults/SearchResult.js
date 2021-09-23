@@ -33,7 +33,10 @@ export function SearchResult({ post }) {
         </div>
         <div className="content-container">
           <p className="title">{post.title}</p>
-          <span className="date-stamp">Posted: {formatTime(post)} ago.</span>
+          <div>
+            <span className="author">{post.author}</span>
+            <span className="date-stamp"> {formatTime(post)} ago.</span>
+          </div>
         </div>
       </div>
       {post.detailedView && <DetailedView post={post} />}

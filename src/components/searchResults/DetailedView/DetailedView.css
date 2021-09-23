@@ -109,14 +109,25 @@ Clickable items : orangered / rgba(255,69,0,1)
   font-weight: 550;
 }
 
+/* Styles for bottom bar */
+.bottom-bar {
+  display: flex;
+  align-content: center;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 2rem;
+  padding: 0.5rem 0;
+  border-top: 1px solid black;
+}
 /* Styles for link */
 .link-oryginal {
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   width: 100%;
-  margin-top: 1rem;
+
   text-decoration: none;
 }
 .link-oryginal a {
@@ -138,16 +149,6 @@ Clickable items : orangered / rgba(255,69,0,1)
   transform: translateY(-0.1rem);
   box-shadow: 0.1rem 0.1rem 0.3rem #bab8ba;
 }
-
-/* Styles for bottom bar */
-.bottom-bar {
-  display: flex;
-  align-content: center;
-  justify-content: end;
-  width: 100%;
-  padding: 0.5rem 0;
-  border-top: 1px solid black;
-}
 .bottom-bar > * {
   margin-right: 0.5rem;
 }
@@ -161,6 +162,7 @@ Clickable items : orangered / rgba(255,69,0,1)
 }
 
 .comments {
+  z-index: 1020;
   display: flex;
   align-items: center;
 

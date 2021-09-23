@@ -3,7 +3,7 @@ import "./DetailedView.css";
 import linkIcon from "../../../media/linkIcon.png";
 import commentsIcon from "../../../media/commentsIcon.png";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleDatailedViewById } from "../../searchResults/searchResultsSlice";
+import { toggleDatailedViewById } from "../searchResultsSlice";
 import { loadComments, selectComments } from "./Comments/commentsSlice";
 import {
   formatTime,
@@ -42,7 +42,7 @@ export function DetailedView({ post }) {
   const checkVid = isVid(post.imgURL);
 
   //load comments from the stay if there are any
-  const loading = useSelector(loadComments);
+
   const allComments = useSelector(selectComments);
 
   //comments for the specyfic post
@@ -99,16 +99,16 @@ export function DetailedView({ post }) {
           </div>
 
           {/* Link to oryginal content */}
-          <div className="link-oryginal">
-            <a href={post.imgURL} target="_blank" rel="noreferrer">
-              <img src={linkIcon} alt="" className="anchor-img" />
-            </a>
-
-            <a href={post.imgURL} target="_blank" rel="noreferrer">
-              Oryginal content
-            </a>
-          </div>
           <div className="bottom-bar">
+            <div className="link-oryginal">
+              <a href={post.imgURL} target="_blank" rel="noreferrer">
+                <img src={linkIcon} alt="" className="anchor-img" />
+              </a>
+
+              <a href={post.imgURL} target="_blank" rel="noreferrer">
+                Oryginal content
+              </a>
+            </div>
             <span className="upvotes">{formatUps(post)} ups</span>
             <div className="comments" onClick={toggleComments}>
               <img src={commentsIcon} alt="comments" />
