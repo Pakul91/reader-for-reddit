@@ -19,7 +19,7 @@ export const loadComments = createAsyncThunk(
 
         // return object containing post id as a key and comments array as a body
       });
-      return { [id]: formatedComments };
+      return { [id]: { length: formatedComments.length, ...formatedComments } };
     } catch (error) {
       return error.message;
     }
@@ -33,16 +33,7 @@ const commentsSlice = createSlice({
     commentsLoading: false,
     failedToLoadComments: false,
   },
-  reducers: {
-    /**
-     * check if comments for given post are already loaded.
-     * @param {object} state
-     * @param {string} action  / post id to check agains the comments object
-     */
-    alreadyLoaded: (state, action) => {
-      return state.comments[action.payload] ? true : false;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(loadComments.pending, (state) => {
@@ -64,7 +55,6 @@ const commentsSlice = createSlice({
 
 // selectors
 export const selectComments = (state) => state.comments.comments;
-//action creators
-export const { alreadyLoaded } = commentsSlice.actions;
+export const commentsLoading = (state) => state.comments.commentsLoading;
 //reducer
 export default commentsSlice.reducer;

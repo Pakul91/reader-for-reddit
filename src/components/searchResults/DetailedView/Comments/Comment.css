@@ -1,0 +1,22 @@
+/* 
+Color for panels: #F9F7FA
+Color for background: #E0DEE0  / rgba(224, 222, 224, 1)
+Color for shadows: #BAB8BA
+Clickable items : orangered / rgba(255,69,0,1)
+
+*/
+.comment-container {
+  border: 0.5px solid black;
+  font-size: 0.75rem;
+  width: 90%;
+
+  background-color: #f9f7fa;
+  box-shadow: 0.5rem 0.5rem 0.3rem #bab8ba;
+  border-radius: 0.2rem;
+  margin: 0 0.5rem 0.5rem 0.5rem;
+  padding: 0.5rem;
+}
+
+.comment-body {
+  margin: 0.5rem;
+}

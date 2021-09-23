@@ -26,7 +26,6 @@ export const fetchData = async function (endpoint) {
 //Load comments with provided permalink. Permalink is an endpoint for each posts comments
 export const fetchComments = async function (permalink) {
   try {
-    console.log(`${rootURL}${permalink}.json`);
     const response = await fetch(`${rootURL}${permalink}.json`);
     const data = await response.json();
     //data[1] contains some of the comments from the post

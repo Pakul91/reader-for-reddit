@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./DetailedView.css";
 import linkIcon from "../../../media/linkIcon.png";
 import commentsIcon from "../../../media/commentsIcon.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleDatailedViewById } from "../../searchResults/searchResultsSlice";
-import { loadComments } from "./Comments/commentsSlice";
+import { loadComments, selectComments } from "./Comments/commentsSlice";
 import {
   formatTime,
   formatUps,
@@ -13,13 +13,24 @@ import {
   formatEmbeded,
 } from "../../../Helpers/HELPERS";
 import { markdown } from "../../../Helpers/drawdown";
+import { Comment } from "./Comments/Comment";
 
 //===========================================
 
 export function DetailedView({ post }) {
   const dispatch = useDispatch();
+
+  const [commentsActive, setCommentsActive] = useState(false);
+
   //Turn detailed view off when clicked on overlay or X button
   const handleClick = () => [dispatch(toggleDatailedViewById(post.id))];
+
+  //Toggle coments on/off
+  const toggleComments = (e) => {
+    e.stopPropagation();
+    if (!commentsById) return;
+    setCommentsActive(commentsActive ? false : true);
+  };
 
   //Format retrieved markdown text to HTML
   const formatedText = post.text ? markdown(post.text) : "";
@@ -30,9 +41,18 @@ export function DetailedView({ post }) {
   //check if provided url is a valid vidoe. If yes, return link if no return fals
   const checkVid = isVid(post.imgURL);
 
+  //load comments from the stay if there are any
+  const loading = useSelector(loadComments);
+  const allComments = useSelector(selectComments);
+
+  //comments for the specyfic post
+  const commentsById = allComments[post.id];
+
+  //load comments when rendered
   useEffect(() => {
-    dispatch(loadComments(post));
-  }, [dispatch, post]);
+    //check if there are comments for this post in the state
+    if (!commentsById) dispatch(loadComments(post));
+  }, [dispatch, post, commentsById]);
 
   return (
     <div>
@@ -90,11 +110,21 @@ export function DetailedView({ post }) {
           </div>
           <div className="bottom-bar">
             <span className="upvotes">{formatUps(post)} ups</span>
-            <div className="comments">
+            <div className="comments" onClick={toggleComments}>
               <img src={commentsIcon} alt="comments" />
-              <span>xxx</span>
+
+              <span>{commentsById ? commentsById.length : " ..."}</span>
             </div>
           </div>
+          {/* If comments are set active render provided coments */}
+          {commentsActive &&
+            commentsById &&
+            Object.values(commentsById).map((comment) => {
+              if (!comment.author) {
+                return "";
+              }
+              return <Comment key={comment.id} comment={comment} />;
+            })}
         </div>
       </div>
     </div>
