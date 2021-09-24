@@ -55,7 +55,6 @@ export const formatNumber = function (num) {
   //converting number for milions
   const milions = Math.floor(num / 1000000);
   const decimalForMilion = Math.floor((num % 1000000) / 100000);
-  console.log(999999);
 
   //converting number for thousands
   const thousands = Math.floor(num / 1000);

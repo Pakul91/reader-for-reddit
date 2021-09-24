@@ -22,7 +22,7 @@ export function DetailedView({ post }) {
 
   const [commentsActive, setCommentsActive] = useState(false);
 
-  //Turn detailed view off when clicked on overlay or X button
+  //Turn detailed view off when clicked  X button
   const handleClick = () => [dispatch(toggleDatailedViewById(post.id))];
 
   //Toggle coments on/off
@@ -52,6 +52,16 @@ export function DetailedView({ post }) {
   useEffect(() => {
     //check if there are comments for this post in the state
     if (!commentsById) dispatch(loadComments(post));
+    //toggeling detailed view when press escape
+    const handleEscPress = (e) => {
+      dispatch(toggleDatailedViewById(post.id));
+    };
+    //event listener for key press
+    document.addEventListener("keydown", handleEscPress);
+    //clearing event listener on dismount
+    return () => {
+      document.removeEventListener("keydown", handleEscPress);
+    };
   }, [dispatch, post, commentsById]);
 
   return (
