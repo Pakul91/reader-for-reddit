@@ -5,7 +5,7 @@ import "./SearchResults.css";
 import textIcon from "../../media/textIcon.png";
 import { DetailedView } from "./DetailedView/DetailedView";
 // Functions
-import { formatTime, formatUps } from "../../Helpers/HELPERS";
+import { formatTime, formatNumber } from "../../Helpers/HELPERS";
 import { toggleDatailedViewById } from "./searchResultsSlice";
 
 //======================================
@@ -20,7 +20,7 @@ export function SearchResult({ post }) {
   return (
     <div>
       <div className="searchResult-container" onClick={handleClick}>
-        <div className="ups">{formatUps(post)}</div>
+        <div className="ups">{formatNumber(post.ups)}</div>
         <div className="thumbnail-container">
           <img
             src={

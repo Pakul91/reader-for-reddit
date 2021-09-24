@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loadPosts } from "../searchResults/searchResultsSlice";
+import { loadPosts, loadSubreddits } from "../searchResults/searchResultsSlice";
 import "./SearchBar.css";
 import searchIcon from "../../media/searchIcon.png";
 import {
@@ -21,7 +21,7 @@ export function SearchBar() {
     //Load post with given term
     dispatch(loadPosts({ term, type: "searchTerm" }));
     //Load subreddits with given term
-    //
+    dispatch(loadSubreddits(term));
     //Unselect all buttons from quickAccess bar
     dispatch(setAllToUnselected());
     //Set Posts button to selected

@@ -7,7 +7,7 @@ import { toggleDatailedViewById } from "../searchResultsSlice";
 import { loadComments, selectComments } from "./Comments/commentsSlice";
 import {
   formatTime,
-  formatUps,
+  formatNumber,
   isImg,
   isVid,
   formatEmbeded,
@@ -109,7 +109,7 @@ export function DetailedView({ post }) {
                 Oryginal content
               </a>
             </div>
-            <span className="upvotes">{formatUps(post)} ups</span>
+            <span className="upvotes">{formatNumber(post.ups)} ups</span>
             <div className="comments" onClick={toggleComments}>
               <img src={commentsIcon} alt="comments" />
 

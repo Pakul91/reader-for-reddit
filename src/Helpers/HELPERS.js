@@ -1,9 +1,61 @@
-//Format upvotes
-export const formatUps = function ({ ups }) {
-  if (ups < 1000) return ups;
+// Take loaded posts data return object with each post.id as key and post object as a body
+export const formatPosts = ({ data }) => {
+  const formatedPosts = {};
 
-  const thousands = Math.floor(ups / 1000);
-  const decimal = Math.floor((ups % 1000) / 100);
+  data.children.map(
+    ({ data }) =>
+      (formatedPosts[data.id] = {
+        id: data.id,
+        author: data.author,
+        created: data.created,
+        subreddit: data.subreddit,
+        subredditId: data.subreddit_id,
+        title: data.title,
+        thumbnail: data.thumbnail,
+        ups: data.ups,
+        imgURL: data.url,
+        permalink: data.permalink,
+        text: data.selftext,
+        detailedView: false,
+        // conditinally adding property:
+        ...(data.media &&
+          data.media.reddit_video && {
+            videoURL: data.media.reddit_video.fallback_url,
+          }),
+        ...(data.media &&
+          data.media.oembed && {
+            embededVid: data.media.oembed.html,
+          }),
+      })
+  );
+
+  return formatedPosts;
+};
+
+// Take loaded subreddits data and return object with each subreddit.id as key and subreddit object as a body
+export const formatSubreddits = ({ data }) => {
+  const formatedSubreddits = {};
+
+  data.children.map(
+    ({ data }) =>
+      (formatedSubreddits[data.id] = {
+        id: data.id,
+        name: data.display_name,
+        img: data.icon_img,
+        description: data.public_description,
+        subscribers: data.subscribers,
+      })
+  );
+
+  return formatedSubreddits;
+};
+
+//Format number for upvotes and subscribers
+export const formatNumber = function (num) {
+  if (num < 1000) return num;
+
+  const thousands = Math.floor(num / 1000);
+  const decimal = Math.floor((num % 1000) / 100);
   const display = `${thousands}${decimal ? `.${decimal}` : ""}k`;
   return display;
 };
@@ -39,40 +91,6 @@ export const formatTime = function ({ created }) {
     return hours > 1 ? `${hours} hours` : `${hours} hour`;
   }
   return minsPast > 1 ? `${minsPast} minutes` : `${minsPast} minute`;
-};
-
-// Take data from the post request and return object with each post.id and key and post object as a body
-export const formatPosts = ({ data }) => {
-  const formatedPosts = {};
-
-  data.children.map(
-    ({ data }) =>
-      (formatedPosts[data.id] = {
-        id: data.id,
-        author: data.author,
-        created: data.created,
-        subreddit: data.subreddit,
-        subredditId: data.subreddit_id,
-        title: data.title,
-        thumbnail: data.thumbnail,
-        ups: data.ups,
-        imgURL: data.url,
-        permalink: data.permalink,
-        text: data.selftext,
-        detailedView: false,
-        // conditinally adding property:
-        ...(data.media &&
-          data.media.reddit_video && {
-            videoURL: data.media.reddit_video.fallback_url,
-          }),
-        ...(data.media &&
-          data.media.oembed && {
-            embededVid: data.media.oembed.html,
-          }),
-      })
-  );
-
-  return formatedPosts;
 };
 
 // Check if provided url has an image extension

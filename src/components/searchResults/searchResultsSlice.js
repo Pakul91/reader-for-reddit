@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchData } from "../../API/redditAPI";
-import { formatPosts } from "../../Helpers/HELPERS";
+import { formatPosts, formatSubreddits } from "../../Helpers/HELPERS";
 
 // ========== ENDPOINTS FOR FETCHING ============
 
@@ -53,8 +53,19 @@ export const loadPosts = createAsyncThunk(
   }
 );
 
+export const loadSubreddits = createAsyncThunk(
+  "searchResults/loadSubredditsBySearchTerm",
+  async (term) => {
+    const endpoint = `search.json?q=${term}&type=sr%2Cuser`;
+
+    const subreddits = await fetchData(endpoint);
+
+    return formatSubreddits(subreddits);
+  }
+);
+
 const searchResultsSlice = createSlice({
-  name: "serchResults",
+  name: "searchResults",
   initialState: {
     posts: {},
     subreddits: [],
@@ -89,6 +100,19 @@ const searchResultsSlice = createSlice({
       .addCase(loadPosts.rejected, (state) => {
         state.isLoadingPosts = false;
         state.failedToLoadPosts = true;
+      })
+      .addCase(loadSubreddits.pending, (state) => {
+        state.isLoadingSubreddits = true;
+        state.failedToLoadSubreddits = false;
+      })
+      .addCase(loadSubreddits.fulfilled, (state, action) => {
+        state.isLoadingSubreddits = false;
+        state.failedToLoadSubreddits = false;
+        state.subreddits = action.payload;
+      })
+      .addCase(loadSubreddits.rejected, (state) => {
+        state.isLoadingSubreddits = false;
+        state.failedToLoadSubreddits = true;
       });
   },
 });
