@@ -68,7 +68,7 @@ const searchResultsSlice = createSlice({
   name: "searchResults",
   initialState: {
     posts: {},
-    subreddits: [],
+    subreddits: {},
     postsActive: true,
     subredditsActive: false,
     isLoadingPosts: false,

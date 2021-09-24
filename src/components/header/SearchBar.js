@@ -8,6 +8,7 @@ import {
   setAllToUnselected,
   setToSelectedById,
 } from "../QuickAccessBar/quickAccessBarSlice";
+import { setAllInactive } from "../subredditsPanel/subredditsSlice";
 
 export function SearchBar() {
   const dispatch = useDispatch();
@@ -28,6 +29,8 @@ export function SearchBar() {
     dispatch(setToSelectedById("posts"));
     //Enable Subreddits content button
     dispatch(unsetDisabledById("subreddits"));
+    //set all featured subreddits to inactive state
+    dispatch(setAllInactive());
     //Clear serch bar
     setTerm("");
   }
