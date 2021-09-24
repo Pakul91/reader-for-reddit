@@ -125,6 +125,8 @@ export const selectIsLoadingPosts = (state) =>
 //Subreddits selectors
 export const selectSearchedSubreddits = (state) =>
   state.searchResults.subreddits;
+export const selectIsLoadingSubreddits = (state) =>
+  state.searchResults.isLoadingSubreddits;
 
 //Action creators exports
 export const { toggleDatailedViewById } = searchResultsSlice.actions;

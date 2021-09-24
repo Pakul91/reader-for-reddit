@@ -116,6 +116,10 @@ export const quickAccessBarSlice = createSlice({
 
 // Selectors
 export const selectButtons = (state) => state.quickAccessBar.buttons;
+export const selectPostsButtonStatus = (state) =>
+  state.quickAccessBar.buttons.posts.selected;
+export const selectSubredditsButtonStatus = (state) =>
+  state.quickAccessBar.buttons.subreddits.selected;
 // Action creators
 export const {
   setAllToUnselected,

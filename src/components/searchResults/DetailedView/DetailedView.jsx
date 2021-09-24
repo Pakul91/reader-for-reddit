@@ -81,7 +81,7 @@ export function DetailedView({ post }) {
 
           {/* Display video if there is any */}
           {post.videoURL && (
-            <video controls muted="false" className="video-post">
+            <video controls muted={false} className="video-post">
               <source src={post.videoURL} />
               Video not avaiable on your browser!😭
             </video>

@@ -10,7 +10,7 @@ import { toggleDatailedViewById } from "./searchResultsSlice";
 
 //======================================
 
-export function SearchResult({ post }) {
+export function PostSearchResult({ post }) {
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -19,7 +19,7 @@ export function SearchResult({ post }) {
 
   return (
     <div>
-      <div className="searchResult-container" onClick={handleClick}>
+      <div className="postSearchResult-container" onClick={handleClick}>
         <div className="ups">{formatNumber(post.ups)}</div>
         <div className="thumbnail-container">
           <img

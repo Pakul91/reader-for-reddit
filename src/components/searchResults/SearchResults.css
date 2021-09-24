@@ -10,7 +10,8 @@ Color for shadows: #BAB8BA
   margin: 1rem 1% 0 1%;
 }
 
-.searchResult-container {
+/* Styles for rendering POSTS */
+.postSearchResult-container {
   display: flex;
   height: 6rem;
   background-color: #f9f7fa;
@@ -21,11 +22,11 @@ Color for shadows: #BAB8BA
   transition: all 0.3s;
 }
 
-.searchResult-container > * {
+.postSearchResult-container > * {
   align-items: center;
 }
 
-.searchResult-container:hover {
+.postSearchResult-container:hover {
   transform: translate(0.1rem, -0.1rem);
   cursor: pointer;
   box-shadow: 0.6rem 0.6rem 0.3rem #bab8ba;
@@ -74,6 +75,50 @@ Color for shadows: #BAB8BA
 .date-stamp {
   margin-top: 0.2rem;
   font-size: 0.5rem;
+}
+
+/* Styles for rendering SUBREDDITS */
+
+.subredditSearchResult-container {
+  display: flex;
+  height: 3rem;
+  background-color: #f9f7fa;
+  box-shadow: 0.3rem 0.3rem 0.3rem #bab8ba;
+  border-radius: 0.2rem;
+  margin: 0 0.5rem 0.3rem 0.5rem;
+  padding: 0.5rem;
+  transition: all 0.3s;
+}
+
+.subredditSearchResult-container:hover {
+  transform: translate(0.05rem, -0.05rem);
+  cursor: pointer;
+}
+
+.subreddit-icon-subsribers {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+
+  width: 4rem;
+  font-size: 0.4rem;
+}
+
+.subreddit-icon {
+  height: 2rem;
+  margin-bottom: 0.2rem;
+}
+
+.subreddit-icon img {
+  height: 100%;
+  border-radius: 50%;
+}
+
+.description-container {
+  font-size: 0.6rem;
+  margin-left: 0.5rem;
 }
 
 @media screen and (max-width: 320px) {

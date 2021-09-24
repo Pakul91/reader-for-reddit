@@ -6,6 +6,7 @@ import commentsIcon from "./commentsIcon.png";
 import linkIcon from "./linkIcon.png";
 import searchIcon from "./searchIcon.png";
 import textIcon from "./textIcon.png";
+import userIcon from "./userIcon.png";
 import logo from "./logo.png";
 
 export const media = {
@@ -17,5 +18,6 @@ export const media = {
   linkIcon,
   searchIcon,
   textIcon,
+  userIcon,
   logo,
 };
