@@ -43,7 +43,6 @@ export const formatTime = function ({ created }) {
 
 // Take data from the post request and return object with each post.id and key and post object as a body
 export const formatPosts = ({ data }) => {
-  console.log(data);
   const formatedPosts = {};
 
   data.children.map(
@@ -102,4 +101,12 @@ export function formatEmbeded(link) {
   const formatedLink = link.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
 
   return formatedLink;
+}
+
+// Apply style selector suffix depending on status
+export function applyStyleByStatus(buttons, id) {
+  if (buttons[id].selected) return "-selected";
+  if (buttons[id].disabled) return "-disabled";
+  // if non apply return empty string
+  return "";
 }

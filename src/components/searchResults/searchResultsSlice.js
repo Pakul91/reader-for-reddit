@@ -23,6 +23,10 @@ Load posts will accept and object:
   type: specyfies what endpoint to use (will accept searchTerm/category/subredditPosts )
 }
 */
+
+/**
+ *
+ */
 export const loadPosts = createAsyncThunk(
   "searchResults/loadPostBySearchTerm",
   async ({ term, type }) => {
