@@ -52,12 +52,27 @@ export const formatSubreddits = ({ data }) => {
 
 //Format number for upvotes and subscribers
 export const formatNumber = function (num) {
-  if (num < 1000) return num;
+  //converting number for milions
+  const milions = Math.floor(num / 1000000);
+  const decimalForMilion = Math.floor((num % 1000000) / 100000);
+  console.log(999999);
 
+  //converting number for thousands
   const thousands = Math.floor(num / 1000);
-  const decimal = Math.floor((num % 1000) / 100);
-  const display = `${thousands}${decimal ? `.${decimal}` : ""}k`;
-  return display;
+  const decimalForThousands = Math.floor((num % 1000) / 100);
+
+  //return values
+
+  const thousandsWithDecimals = `${thousands}${
+    decimalForThousands ? `.${decimalForThousands}` : ""
+  }k`;
+  const thousandsWithoutDecimals = `${thousands}k`;
+  const milionsWithDecimals = `${milions}.${decimalForMilion}m`;
+
+  if (num < 1000) return num;
+  if (999 < num && num < 100000) return thousandsWithDecimals;
+  if (99999 < num && num < 1000000) return thousandsWithoutDecimals;
+  if (999999 < num) return milionsWithDecimals;
 };
 
 //Calculate and format time passed since postig
