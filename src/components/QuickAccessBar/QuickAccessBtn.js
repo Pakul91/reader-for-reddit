@@ -5,7 +5,7 @@ import { selectButtons, quickAccessBtnClick } from "./quickAccessBarSlice";
 import { applyStyleByStatus } from "../../Helpers/HELPERS";
 import { media } from "../../media/media";
 
-export function QuickAccesButton({ button }) {
+export function QuickAccesBtn({ button }) {
   const dispatch = useDispatch();
   const buttons = useSelector(selectButtons);
 

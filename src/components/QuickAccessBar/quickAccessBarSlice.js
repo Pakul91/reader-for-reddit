@@ -103,13 +103,13 @@ export const quickAccessBarSlice = createSlice({
      * @param {string} action | id of the button provided by event listener when clicked on it
      */
     unsetDisabledById: (state, action) => {
-      state.buttons[action.payload].disabled = true;
+      state.buttons[action.payload].disabled = false;
     },
 
     // Toggle between Posts and Subbredits selection
     toggleContent: (state) => {
-      state.buttons.posts = !state.buttons.posts;
-      state.buttons.subreddits = !state.buttons.subreddits;
+      state.buttons.posts.selected = !state.buttons.posts.selected;
+      state.buttons.subreddits.selected = !state.buttons.subreddits.selected;
     },
   },
 });
