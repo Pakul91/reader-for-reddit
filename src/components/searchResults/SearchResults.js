@@ -41,7 +41,7 @@ export function SearchResults() {
       {displayPosts && searchTerm && (
         <div className="search-term-display">
           <p>
-            Posts for: <span className>'{searchTerm}'</span>
+            Posts for: <span>'{searchTerm}'</span>
           </p>
         </div>
       )}
@@ -56,7 +56,7 @@ export function SearchResults() {
       {displaySubreddits && (
         <div className="search-term-display">
           <p>
-            Subreddits for: <span className>'{searchTerm}'</span>
+            Subreddits for: <span>'{searchTerm}'</span>
           </p>
         </div>
       )}

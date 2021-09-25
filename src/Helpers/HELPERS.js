@@ -50,6 +50,19 @@ export const formatSubreddits = ({ data }) => {
   return formatedSubreddits;
 };
 
+//format if term provided is more than 1 word
+export const formatTerm = (term) => {
+  //if no term provided return
+  if (!term) return;
+  //convert string to array of seperate words
+  const wordsArray = term.split(" ");
+  //if there is single word return non-formated term
+  if (wordsArray.length === 1) return term;
+  // else add %20 before each word and join it into 1 string
+  const formatedWords = wordsArray.map((word) => `%20${word}`).join("");
+  return formatedWords;
+};
+
 //Format number for upvotes and subscribers
 export const formatNumber = function (num) {
   //converting number for milions
@@ -114,7 +127,7 @@ export function isImg(url) {
   const regex = /\.(gif|jpe?g|tiff?|png|webp|bmp|gif)$/i;
   return regex.test(imgUrl);
 }
-
+// Check if provided url has an video extension
 export function isVid(url) {
   if (!url) return false;
 

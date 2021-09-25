@@ -1,6 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchData } from "../../API/redditAPI";
-import { formatPosts, formatSubreddits } from "../../Helpers/HELPERS";
+import {
+  formatPosts,
+  formatSubreddits,
+  formatTerm,
+} from "../../Helpers/HELPERS";
 
 // ========== ENDPOINTS FOR FETCHING ============
 
@@ -34,13 +38,13 @@ export const loadPosts = createAsyncThunk(
       let endpoint;
 
       if (type === "searchTerm") {
-        endpoint = `search.json?q=${term}&type=link`;
+        endpoint = `search.json?q=${formatTerm(term)}&type=link`;
       }
       if (type === "category") {
-        endpoint = `${term}.json`;
+        endpoint = `${formatTerm(term)}.json`;
       }
       if (type === "subredditPosts") {
-        endpoint = `r/${term}.json`;
+        endpoint = `r/${formatTerm(term)}.json`;
       }
 
       const posts = await fetchData(endpoint);
@@ -76,11 +80,15 @@ export const loadSubredditPostsByCategory = createAsyncThunk(
 export const loadSubreddits = createAsyncThunk(
   "searchResults/loadSubredditsBySearchTerm",
   async (term) => {
-    const endpoint = `search.json?q=${term}&type=sr%2Cuser`;
+    try {
+      const endpoint = `search.json?q=${term}&type=sr%2Cuser`;
 
-    const subreddits = await fetchData(endpoint);
+      const subreddits = await fetchData(endpoint);
 
-    return formatSubreddits(subreddits);
+      return formatSubreddits(subreddits);
+    } catch (error) {
+      return error.message;
+    }
   }
 );
 
@@ -94,8 +102,10 @@ const searchResultsSlice = createSlice({
     subredditsActive: false,
     isLoadingPosts: false,
     failedToLoadPosts: false,
+    postsError: "",
     isLoadingSubreddits: false,
     failedToLoadSubreddits: false,
+    subredditsError: "",
   },
   reducers: {
     //Store search term

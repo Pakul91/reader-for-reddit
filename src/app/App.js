@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import "./reset.css";
 import "./App.css";
 import { Header } from "../components/header/Header";
-import { QuickAccessBar } from "../components/QuickAccessBar/QuickAccessBar";
+
 import { SearchResults } from "../components/searchResults/SearchResults";
 import { SubredditsPanel } from "../components/subredditsPanel/SubredditsPanel";
 import { loadPosts } from "../components/searchResults/searchResultsSlice";
