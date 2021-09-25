@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loadPosts, loadSubreddits } from "../searchResults/searchResultsSlice";
+import {
+  loadPosts,
+  loadSubreddits,
+  setSearchTerm,
+} from "../searchResults/searchResultsSlice";
 import "./SearchBar.css";
 import searchIcon from "../../media/searchIcon.png";
 import {
@@ -19,6 +23,8 @@ export function SearchBar() {
     e.preventDefault();
     //if search term is empty return
     if (!term) return;
+    //Store search term in the state
+    dispatch(setSearchTerm(term));
     //Load post with given term
     dispatch(loadPosts({ term, type: "searchTerm" }));
     //Load subreddits with given term

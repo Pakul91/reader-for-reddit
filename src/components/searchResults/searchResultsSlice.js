@@ -53,6 +53,26 @@ export const loadPosts = createAsyncThunk(
   }
 );
 
+// Load post for given subreddits from categories hot/top/new/rising
+/**
+ * @param {string} term | search term
+ * @param {string} category | category name to be displayed
+ */
+export const loadSubredditPostsByCategory = createAsyncThunk(
+  "searchResults/loadPostBySearchTerm",
+  async ({ term, category }) => {
+    try {
+      const endpoint = `r/${term}/${category}.json`;
+      const posts = await fetchData(endpoint);
+
+      //expect Object as returned value
+      return formatPosts(posts);
+    } catch (error) {
+      return error.message;
+    }
+  }
+);
+
 export const loadSubreddits = createAsyncThunk(
   "searchResults/loadSubredditsBySearchTerm",
   async (term) => {
@@ -69,6 +89,7 @@ const searchResultsSlice = createSlice({
   initialState: {
     posts: {},
     subreddits: {},
+    searchTerm: "",
     postsActive: true,
     subredditsActive: false,
     isLoadingPosts: false,
@@ -77,6 +98,10 @@ const searchResultsSlice = createSlice({
     failedToLoadSubreddits: false,
   },
   reducers: {
+    //Store search term
+    setSearchTerm: (state, action) => {
+      state.searchTerm = action.payload;
+    },
     //Toggle clicked detailed view. Will accept post ID as action.payload
     toggleDatailedViewById: (state, action) => {
       const post = state.posts[action.payload];
@@ -121,15 +146,16 @@ const searchResultsSlice = createSlice({
 export const selectSearchedPosts = (state) => state.searchResults.posts;
 export const selectIsLoadingPosts = (state) =>
   state.searchResults.isLoadingPosts;
-
 //Subreddits selectors
 export const selectSearchedSubreddits = (state) =>
   state.searchResults.subreddits;
 export const selectIsLoadingSubreddits = (state) =>
   state.searchResults.isLoadingSubreddits;
-
+//searchTerm selector
+export const selectSearchTerm = (state) => state.searchResults.searchTerm;
 //Action creators exports
-export const { toggleDatailedViewById } = searchResultsSlice.actions;
+export const { toggleDatailedViewById, setSearchTerm } =
+  searchResultsSlice.actions;
 
 //Reducer export
 export default searchResultsSlice.reducer;

@@ -8,13 +8,14 @@ import "./QuickAccessBar.css";
 import { selectButtons } from "./quickAccessBarSlice";
 import { QuickAccesBtn } from "./QuickAccessBtn";
 import { ContentBtn } from "./ContentBtn";
+// import
 
 export function QuickAccessBar() {
   const buttons = useSelector(selectButtons);
 
   return (
     <div className="quickAccesBar-container">
-      <div className="content-slection">
+      <div className="content-slection-container">
         {/* RENDER BUTTONS WITH TYPE OF 'content' */}
         {Object.values(buttons).map((button) =>
           button.type === "content" ? (

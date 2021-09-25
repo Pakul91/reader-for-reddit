@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="app-container">
       <Header />
-      <QuickAccessBar />
+
       <main>
         <SearchResults />
         <SubredditsPanel />

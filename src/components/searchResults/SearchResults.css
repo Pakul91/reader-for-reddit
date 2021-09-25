@@ -79,6 +79,22 @@ Color for shadows: #BAB8BA
 
 /* Styles for rendering SUBREDDITS */
 
+.search-term-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.5rem;
+  width: 98%;
+  margin: 0 auto 0.5rem;
+  background-color: #f9f7fa;
+  box-shadow: 0 0.5rem 0.3rem #bab8ba;
+  border-radius: 0.2rem;
+}
+
+.search-term-display span {
+  font-weight: 550;
+}
+
 .subredditSearchResult-container {
   display: flex;
   height: 3rem;

@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { loadPosts } from "../searchResults/searchResultsSlice";
+import { loadPosts, setSearchTerm } from "../searchResults/searchResultsSlice";
 import { setActiveById, setAllInactive } from "./subredditsSlice";
 import {
   setAllToUnselected,
@@ -14,6 +14,8 @@ export function Subreddit({ subreddit }) {
   const handleClick = () => {
     //set all featured subreddits to inactive state
     dispatch(setAllInactive());
+    //set serarch term to 'r/' prefixed subreddit name
+    dispatch(setSearchTerm(`r/${subreddit.name}`));
     //set selected subreddit state to active
     dispatch(setActiveById(subreddit.id));
     //load subreddit posts
