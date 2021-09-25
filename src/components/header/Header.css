@@ -38,3 +38,21 @@ Clickable items : orangered / rgba(255,69,0,1)
   font-size: 1.5rem;
   color: orangered;
 }
+
+.name-short {
+  display: none;
+}
+
+@media screen and (max-width: 1050px) {
+}
+@media screen and (max-width: 520px) {
+  .name {
+    display: none;
+  }
+  .name-short {
+    display: inline;
+    margin-left: 0.75rem;
+    font-size: 1.2rem;
+    font-family: "Gluten", sans-serif;
+  }
+}

@@ -21,7 +21,7 @@ export function QuickAccesBtn({ button }) {
   };
   return (
     <div className={`btn-quickAccess${style}`}>
-      <span>{button.id.toUpperCase()}</span>
+      <span className="btn-quickAccess-label">{button.id.toUpperCase()}</span>
 
       <img
         onClick={handleQuickAccesBtnClick}

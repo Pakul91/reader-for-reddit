@@ -12,6 +12,9 @@ export function Header() {
           <span className="R">R</span>eader For <span className="R">R</span>
           eddit
         </span>
+        <span className="name-short">
+          <span className="R">R</span>4<span className="R">R</span>
+        </span>
       </div>
       <SearchBar />
     </div>

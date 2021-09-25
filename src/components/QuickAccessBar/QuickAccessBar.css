@@ -128,3 +128,26 @@ Clickable items : orangered / rgba(255,69,0,1)
   transition: 0.5s all;
   background-color: orangered;
 }
+
+@media screen and (max-width: 480px) {
+  .content-slection {
+    flex-grow: 1;
+  }
+
+  .quickAccess-buttons-container {
+    border: 1px solid red;
+  }
+  .btn-quickAccess,
+  .btn-quickAccess-selected {
+    margin-right: 0.5rem;
+    height: 50%;
+  }
+  .btn-quickAccess-label {
+    display: none;
+  }
+
+  .btn-quickAccess img,
+  .btn-quickAcces-selected img {
+    margin-left: 0;
+  }
+}
