@@ -3,7 +3,6 @@ import "./ErrorBox.css";
 import { media } from "../../media/media";
 
 export function ErrorBox(error) {
-  console.log(media.errorIcon);
   return (
     <div className="errorBox-container">
       {navigator.onLine && (

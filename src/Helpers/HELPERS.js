@@ -1,4 +1,29 @@
-// Take loaded posts data return object with each post.id as key and post object as a body
+/**
+ * Set timeout to fetch function to prevent hanging forever.
+ * @param {string} url string with url API
+ * @param {number} time time in witch timeout should execute
+ * @returns fetch result
+ */
+export const fetchWithTimeout = async function (url, time = 8000) {
+  //used to abort fetch request
+  const controller = new AbortController();
+  //abort request and throw error when time passed
+  const timer = setTimeout(() => {
+    controller.abort();
+  }, time);
+  //fetch
+  const response = await fetch(url, { signal: controller.signal });
+  //clear timeout if fetch response is faster
+  clearTimeout(timer);
+
+  return response;
+};
+
+/**
+ * Format provided posts data
+ * @param {{}} data provided from fetch request
+ * @returns Object with formated data in format: 'id_of_the_post':{ reguired data}
+ */
 export const formatPosts = ({ data }) => {
   const formatedPosts = {};
 
@@ -32,7 +57,11 @@ export const formatPosts = ({ data }) => {
   return formatedPosts;
 };
 
-// Take loaded subreddits data and return object with each subreddit.id as key and subreddit object as a body
+/**
+ * Format provided subreddits data
+ * @param {{}} data provided from fetch request
+ * @returns Object with formated data in format: 'id_of_the_subreddit':{ reguired data}
+ */
 export const formatSubreddits = ({ data }) => {
   const formatedSubreddits = {};
 
