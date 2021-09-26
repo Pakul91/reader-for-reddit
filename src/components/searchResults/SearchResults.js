@@ -43,7 +43,7 @@ export function SearchResults() {
 
   return (
     <div className="searchResults-container">
-      <QuickAccessBar />
+      {!postsLoading && <QuickAccessBar />}
 
       {/* -----------POSTS----------- */}
       {/* Load error msg if not loading and error */}

@@ -10,9 +10,11 @@ export function SubredditsPanel() {
   return (
     <div className="subredditPanel-container">
       <h2>Featured:</h2>
-      {subreddits.map((subreddit) => {
-        return <Subreddit subreddit={subreddit} key={subreddit.id} />;
-      })}
+      <div className="subreddits-container">
+        {subreddits.map((subreddit) => {
+          return <Subreddit subreddit={subreddit} key={subreddit.id} />;
+        })}
+      </div>
     </div>
   );
 }

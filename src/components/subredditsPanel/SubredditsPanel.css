@@ -49,3 +49,27 @@ Clickable items : orangered / rgba(255,69,0,1)
   width: 100%;
   border-radius: 50%;
 }
+
+@media screen and (max-width: 700px) {
+  /* creating X scroll for subreddits */
+  .subredditPanel-container {
+    display: block;
+    width: 98%;
+    margin: 0.5rem auto 0 auto;
+  }
+  .subreddits-container {
+    display: flex;
+    overflow-x: auto;
+  }
+
+  .subreddit-container:hover {
+    background-color: rgba(255, 69, 0, 0.3);
+    cursor: pointer;
+  }
+
+  .subredditPanel-container h2 {
+    font-size: 1rem;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+}

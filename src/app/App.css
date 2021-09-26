@@ -17,7 +17,7 @@ h2 {
   font-size: 1.2rem;
   margin: 0.5rem 0;
 }
-
+/* REMOVING SCROLLBAR */
 body {
   /* for Internet Explorer, Edge */
   -ms-overflow-style: none;
@@ -26,6 +26,7 @@ body {
   overflow-y: scroll;
 }
 
+/* REMOVING SCROLLBAR */
 body::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
 }
@@ -55,7 +56,39 @@ main {
   }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 820px) {
+  /* Change of the logo in te Header component */
+  /* Removing span from QuickAccessBtn */
+}
+@media screen and (max-width: 700px) {
+  /* creating column with Featured Subredits on top  */
+  main {
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: nowrap;
+  }
+  /* Change featured subreddits panel properties to create scroll in x */
+  /* Change width of detailed view  */
+  /* Change margins for search results */
+}
+
+@media screen and (max-width: 560px) {
+  html,
+  body {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  html,
+  body {
+    font-size: 17px;
+  }
+  /* Remove short-name from the header */
+  /* Change padding for QuickAccesBtns  */
+  /* Change the with of the search bar */
+}
+@media screen and (max-width: 400px) {
   html,
   body {
     font-size: 16px;

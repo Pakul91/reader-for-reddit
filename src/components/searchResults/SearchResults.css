@@ -146,5 +146,15 @@ Color for shadows: #BAB8BA
   overflow-y: hidden;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 700px) {
+  .searchResults-container {
+    margin: 0.5rem auto;
+  }
+
+  .postSearchResult-container {
+    margin: 0 auto 0.5rem auto;
+  }
+  .subredditSearchResult-container {
+    margin: 0 auto 0.3rem auto;
+  }
 }

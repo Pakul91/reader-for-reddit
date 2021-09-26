@@ -183,3 +183,11 @@ Clickable items : orangered / rgba(255,69,0,1)
 .comments img {
   height: 1.5rem;
 }
+
+@media screen and (max-width: 700px) {
+  /* changing width of detailed view */
+  .details-container {
+    left: 1%;
+    width: 98%;
+  }
+}
