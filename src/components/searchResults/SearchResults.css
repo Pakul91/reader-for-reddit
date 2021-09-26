@@ -149,6 +149,7 @@ Color for shadows: #BAB8BA
 @media screen and (max-width: 700px) {
   .searchResults-container {
     margin: 0.5rem auto;
+    max-width: 100%;
   }
 
   .postSearchResult-container {
@@ -156,5 +157,30 @@ Color for shadows: #BAB8BA
   }
   .subredditSearchResult-container {
     margin: 0 auto 0.3rem auto;
+    max-width: 100%;
+  }
+
+  .description-container {
+    overflow-y: auto;
+  }
+
+  .subreddit-icon-container {
+    height: 80%;
+    margin-bottom: 0.2rem;
+  }
+
+  .subreddit-icon-container img {
+    height: 100%;
+    border-radius: 50%;
+  }
+
+  .subreddit-info-container {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    /* justify-content: center; */
+    /* align-items: center; */
+    width: 7rem;
+    font-size: 0.5rem;
   }
 }
