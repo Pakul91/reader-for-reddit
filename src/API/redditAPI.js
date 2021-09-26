@@ -18,8 +18,7 @@ export const fetchData = async function (endpoint) {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.log(error.message);
-    return error.message;
+    throw error.message;
   }
 };
 
@@ -31,7 +30,6 @@ export const fetchComments = async function (permalink) {
     //data[1] contains some of the comments from the post
     return data[1];
   } catch (error) {
-    console.log(error.message);
-    return error.message;
+    throw error.message;
   }
 };

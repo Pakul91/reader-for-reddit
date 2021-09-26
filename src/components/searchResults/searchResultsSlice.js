@@ -34,26 +34,25 @@ Load posts will accept and object:
 export const loadPosts = createAsyncThunk(
   "searchResults/loadPostBySearchTerm",
   async ({ term, type }) => {
-    try {
-      let endpoint;
+    let endpoint;
 
-      if (type === "searchTerm") {
-        endpoint = `search.json?q=${formatTerm(term)}&type=link`;
-      }
-      if (type === "category") {
-        endpoint = `${formatTerm(term)}.json`;
-      }
-      if (type === "subredditPosts") {
-        endpoint = `r/${formatTerm(term)}.json`;
-      }
-
-      const posts = await fetchData(endpoint);
-
-      //expect Object as returned value
-      return formatPosts(posts);
-    } catch (error) {
-      return error.message;
+    if (type === "searchTerm") {
+      endpoint = `search.json?q=${formatTerm(term)}&type=link`;
     }
+    if (type === "category") {
+      endpoint = `${formatTerm(term)}.json`;
+    }
+    if (type === "subredditPosts") {
+      endpoint = `r/${formatTerm(term)}.json`;
+    }
+
+    const posts = await fetchData(endpoint);
+
+    if (posts.data.children.length === 0)
+      throw new Error(`Couldn't find any posts for ${term}`);
+
+    //expect Object as returned value
+    return formatPosts(posts);
   }
 );
 
@@ -65,30 +64,25 @@ export const loadPosts = createAsyncThunk(
 export const loadSubredditPostsByCategory = createAsyncThunk(
   "searchResults/loadPostBySearchTerm",
   async ({ term, category }) => {
-    try {
-      const endpoint = `r/${term}/${category}.json`;
-      const posts = await fetchData(endpoint);
+    const endpoint = `r/${term}/${category}.json`;
+    const posts = await fetchData(endpoint);
 
-      //expect Object as returned value
-      return formatPosts(posts);
-    } catch (error) {
-      return error.message;
-    }
+    //expect Object as returned value
+    return formatPosts(posts);
   }
 );
 
 export const loadSubreddits = createAsyncThunk(
   "searchResults/loadSubredditsBySearchTerm",
   async (term) => {
-    try {
-      const endpoint = `search.json?q=${term}&type=sr%2Cuser`;
+    const endpoint = `search.json?q=${term}&type=sr%2Cuser`;
 
-      const subreddits = await fetchData(endpoint);
+    const subreddits = await fetchData(endpoint);
 
-      return formatSubreddits(subreddits);
-    } catch (error) {
-      return error.message;
-    }
+    if (subreddits.data.children.length === 0)
+      throw new Error(`Couldn't find any subreddits for ${term}`);
+
+    return formatSubreddits(subreddits);
   }
 );
 
@@ -112,6 +106,11 @@ const searchResultsSlice = createSlice({
     setSearchTerm: (state, action) => {
       state.searchTerm = action.payload;
     },
+    //Set posts and subreddits to an empty {}
+    clearData: (state) => {
+      state.posts = {};
+      state.subreddits = {};
+    },
     //Toggle clicked detailed view. Will accept post ID as action.payload
     toggleDatailedViewById: (state, action) => {
       const post = state.posts[action.payload];
@@ -130,11 +129,14 @@ const searchResultsSlice = createSlice({
       .addCase(loadPosts.fulfilled, (state, action) => {
         state.isLoadingPosts = false;
         state.failedToLoadPosts = false;
+
         state.posts = action.payload;
       })
-      .addCase(loadPosts.rejected, (state) => {
+      .addCase(loadPosts.rejected, (state, action) => {
         state.isLoadingPosts = false;
         state.failedToLoadPosts = true;
+
+        state.postsError = action.error.message;
       })
       .addCase(loadSubreddits.pending, (state) => {
         state.isLoadingSubreddits = true;
@@ -145,9 +147,11 @@ const searchResultsSlice = createSlice({
         state.failedToLoadSubreddits = false;
         state.subreddits = action.payload;
       })
-      .addCase(loadSubreddits.rejected, (state) => {
+      .addCase(loadSubreddits.rejected, (state, action) => {
         state.isLoadingSubreddits = false;
         state.failedToLoadSubreddits = true;
+
+        state.subredditsError = action.error.message;
       });
   },
 });
@@ -164,7 +168,7 @@ export const selectIsLoadingSubreddits = (state) =>
 //searchTerm selector
 export const selectSearchTerm = (state) => state.searchResults.searchTerm;
 //Action creators exports
-export const { toggleDatailedViewById, setSearchTerm } =
+export const { toggleDatailedViewById, setSearchTerm, clearData } =
   searchResultsSlice.actions;
 
 //Reducer export

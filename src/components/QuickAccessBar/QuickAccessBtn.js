@@ -5,7 +5,7 @@ import { selectButtons, quickAccessBtnClick } from "./quickAccessBarSlice";
 import { applyStyleByStatus } from "../../Helpers/HELPERS";
 import { media } from "../../media/media";
 import { setAllInactive } from "../subredditsPanel/subredditsSlice";
-import { setSearchTerm } from "../searchResults/searchResultsSlice";
+import { setSearchTerm, clearData } from "../searchResults/searchResultsSlice";
 
 export function QuickAccesBtn({ button }) {
   const dispatch = useDispatch();
@@ -17,6 +17,8 @@ export function QuickAccesBtn({ button }) {
   const handleQuickAccesBtnClick = () => {
     // Set all featuredSubreddits to inactive state
     dispatch(setAllInactive());
+    //Clear previos search results
+    dispatch(clearData());
     // set clicked button to active, rest of quackAccesBtns to inactive, Posts button to active, and Subreddits button to disabled;
     dispatch(quickAccessBtnClick({ buttons, buttonId: button.id }));
     //Set search term to empty string

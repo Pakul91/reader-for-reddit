@@ -4,15 +4,16 @@ import {
   loadPosts,
   loadSubreddits,
   setSearchTerm,
+  clearData,
 } from "../searchResults/searchResultsSlice";
 import "./SearchBar.css";
-import searchIcon from "../../media/searchIcon.png";
 import {
   unsetDisabledById,
   setAllToUnselected,
   setToSelectedById,
 } from "../QuickAccessBar/quickAccessBarSlice";
 import { setAllInactive } from "../subredditsPanel/subredditsSlice";
+import { media } from "../../media/media";
 
 export function SearchBar() {
   const dispatch = useDispatch();
@@ -25,6 +26,8 @@ export function SearchBar() {
     if (!term) return;
     //Store search term in the state
     dispatch(setSearchTerm(term));
+    //Clear previos search results
+    dispatch(clearData());
     //Load post with given term
     dispatch(loadPosts({ term, type: "searchTerm" }));
     //Load subreddits with given term
@@ -56,7 +59,7 @@ export function SearchBar() {
         <input
           className="btn-submit"
           type="image"
-          src={searchIcon}
+          src={media.searchIcon}
           alt="submit"
         />
       </form>

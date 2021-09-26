@@ -33,16 +33,14 @@ export function SubredditSearchResult({ subreddit }) {
   return (
     <div>
       <div className="subredditSearchResult-container" onClick={handleClick}>
-        <div className="subreddit-icon-subsribers">
-          <div className="subreddit-icon">
-            <img
-              src={subreddit.img || media.userIcon}
-              alt="subreddit img"
-            ></img>
-          </div>
-          <div className="subreddit-subsribers">
-            {formatNumber(subreddit.subscribers)} subscribers
-          </div>
+        <div className="subreddit-icon-container">
+          <img src={subreddit.img || media.userIcon} alt="subreddit img"></img>
+        </div>
+        <div className="subreddit-info-container">
+          <p className="subreddit-name">{subreddit.name}</p>
+          <p className="subreddit-subsribers">
+            {formatNumber(subreddit.subscribers)} subs
+          </p>
         </div>
         <div className="description-container">{subreddit.description}</div>
       </div>

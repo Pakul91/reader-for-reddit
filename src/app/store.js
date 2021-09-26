@@ -6,9 +6,9 @@ import quickAccessBarSlice from "../components/QuickAccessBar/quickAccessBarSlic
 
 export const store = configureStore({
   reducer: {
+    searchResults: searchResultsSlice,
     quickAccessBar: quickAccessBarSlice,
     subreddits: subredditsSlice,
-    searchResults: searchResultsSlice,
     comments: commentsSlice,
   },
 });
