@@ -11,10 +11,22 @@
 // const endpoint = `/{}`;
 
 const rootURL = "https://www.reddit.com/";
+//used to abort fetch
+// const controller = new AbortController();
 
 export const fetchData = async function (endpoint) {
   try {
+    //timeout for the fetch request
+    // const fetchTimeout = setTimeout(() => {
+    //   //cancel fetch request
+    //   controller.abort();
+    //   //throw error
+    //   console.log("timeout");
+    //   throw Error("Fetch request takes too loong");
+    // }, 2);
     const response = await fetch(`${rootURL}${endpoint}`);
+    // clearTimeout(fetchTimeout);
+
     const data = await response.json();
     return data;
   } catch (error) {
@@ -27,7 +39,7 @@ export const fetchComments = async function (permalink) {
   try {
     const response = await fetch(`${rootURL}${permalink}.json`);
     const data = await response.json();
-    //data[1] contains some of the comments from the post
+    //data[1] contains  comments from the post
     return data[1];
   } catch (error) {
     throw error.message;

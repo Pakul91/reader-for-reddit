@@ -1,0 +1,29 @@
+.errorBox-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 6rem;
+  background-color: #f9f7fa;
+  box-shadow: 0.5rem 0.5rem 0.3rem #bab8ba;
+  border-radius: 0.2rem;
+  margin: 0 0.5rem 0.5rem 0.5rem;
+  padding: 0.5rem;
+  transition: all 0.3s;
+}
+
+.errorIcon-container {
+  height: 100%;
+  margin-left: 1rem;
+}
+
+.errorIcon-container img {
+  height: 100%;
+}
+
+.error-message {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  color: red;
+  font-size: 1.5rem;
+}

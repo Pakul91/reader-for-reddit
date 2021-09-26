@@ -21,16 +21,14 @@ import {
 // const endpoint = `${category}.json`;
 
 /*
+
+
 Load posts will accept and object:
 {
   term: search term/category/subreddit name provided ('category' will accept hot/new/top/rising), 
   type: specyfies what endpoint to use (will accept searchTerm/category/subredditPosts )
 }
 */
-
-/**
- *
- */
 export const loadPosts = createAsyncThunk(
   "searchResults/loadPostBySearchTerm",
   async ({ term, type }) => {
@@ -49,7 +47,7 @@ export const loadPosts = createAsyncThunk(
     const posts = await fetchData(endpoint);
 
     if (posts.data.children.length === 0)
-      throw new Error(`Couldn't find any posts for ${term}`);
+      throw new Error(`Couldn't find any posts for '${term}'`);
 
     //expect Object as returned value
     return formatPosts(posts);
@@ -80,7 +78,7 @@ export const loadSubreddits = createAsyncThunk(
     const subreddits = await fetchData(endpoint);
 
     if (subreddits.data.children.length === 0)
-      throw new Error(`Couldn't find any subreddits for ${term}`);
+      throw new Error(`Couldn't find any subreddits for '${term}'`);
 
     return formatSubreddits(subreddits);
   }
@@ -156,17 +154,24 @@ const searchResultsSlice = createSlice({
   },
 });
 
+//searchTerm selector
+export const selectSearchTerm = (state) => state.searchResults.searchTerm;
 //Post selectors
 export const selectSearchedPosts = (state) => state.searchResults.posts;
 export const selectIsLoadingPosts = (state) =>
   state.searchResults.isLoadingPosts;
+export const selectFailedToLoadPosts = (state) =>
+  state.searchResults.failedToLoadPosts;
+export const selectPostsError = (state) => state.searchResults.postsError;
 //Subreddits selectors
 export const selectSearchedSubreddits = (state) =>
   state.searchResults.subreddits;
 export const selectIsLoadingSubreddits = (state) =>
   state.searchResults.isLoadingSubreddits;
-//searchTerm selector
-export const selectSearchTerm = (state) => state.searchResults.searchTerm;
+export const selectFailedToLoadSubreddits = (state) =>
+  state.searchResults.failedToLoadSubreddits;
+export const selectSubredditsError = (state) =>
+  state.searchResults.subredditsError;
 //Action creators exports
 export const { toggleDatailedViewById, setSearchTerm, clearData } =
   searchResultsSlice.actions;

@@ -4,7 +4,12 @@ import linkIcon from "../../../media/linkIcon.png";
 import commentsIcon from "../../../media/commentsIcon.png";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleDatailedViewById } from "../searchResultsSlice";
-import { loadComments, selectComments } from "./Comments/commentsSlice";
+import {
+  loadComments,
+  selectComments,
+  selectFailedToLoadComments,
+  selectCommentsError,
+} from "./Comments/commentsSlice";
 import {
   formatTime,
   formatNumber,
@@ -14,6 +19,7 @@ import {
 } from "../../../Helpers/HELPERS";
 import { markdown } from "../../../Helpers/drawdown";
 import { Comment } from "./Comments/Comment";
+import { ErrorBox } from "../../ErrorBox/ErrorBox";
 
 //===========================================
 
@@ -21,42 +27,37 @@ export function DetailedView({ post }) {
   const dispatch = useDispatch();
 
   const [commentsActive, setCommentsActive] = useState(false);
-
+  //Check if comments failed to load
+  const failedToLoad = useSelector(selectFailedToLoadComments);
+  //Error msg if error
+  const commentsError = useSelector(selectCommentsError);
   //Turn detailed view off when clicked  X button
   const handleClick = () => [dispatch(toggleDatailedViewById(post.id))];
-
   //Toggle coments on/off
   const toggleComments = (e) => {
     e.stopPropagation();
     if (!commentsById) return;
     setCommentsActive(commentsActive ? false : true);
   };
-
   //Format retrieved markdown text to HTML
   const formatedText = post.text ? markdown(post.text) : "";
-
   //check if provided url is a valid image
   const checkImg = isImg(post.imgURL);
-
   //check if provided url is a valid vidoe. If yes, return link if no return fals
   const checkVid = isVid(post.imgURL);
-
   //load comments from the stay if there are any
-
   const allComments = useSelector(selectComments);
-
   //comments for the specyfic post
   const commentsById = allComments[post.id];
 
-  //load comments when rendered
+  //load comments when detailed View rendered
   useEffect(() => {
     //check if there are comments for this post in the state
     if (!commentsById) dispatch(loadComments(post));
-    //toggeling detailed view when press escape
+    //close detailed view when press escape
     const handleEscPress = (e) => {
       dispatch(toggleDatailedViewById(post.id));
     };
-    //event listener for key press
     document.addEventListener("keydown", handleEscPress);
     //clearing event listener on dismount
     return () => {
@@ -126,8 +127,12 @@ export function DetailedView({ post }) {
               <span>{commentsById ? commentsById.length : " ..."}</span>
             </div>
           </div>
+
+          {/* ----------COMMENTS--------- */}
+          {failedToLoad && commentsActive && <ErrorBox error={commentsError} />}
           {/* If comments are set active render provided coments */}
-          {commentsActive &&
+          {!failedToLoad &&
+            commentsActive &&
             commentsById &&
             Object.values(commentsById).map((comment) => {
               if (!comment.author) {

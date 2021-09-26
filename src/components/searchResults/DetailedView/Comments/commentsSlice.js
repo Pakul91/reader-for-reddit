@@ -32,6 +32,7 @@ const commentsSlice = createSlice({
     comments: {},
     commentsLoading: false,
     failedToLoadComments: false,
+    commentsError: "",
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -46,9 +47,11 @@ const commentsSlice = createSlice({
 
         state.comments = { ...state.comments, ...action.payload };
       })
-      .addCase(loadComments.rejected, (state) => {
+      .addCase(loadComments.rejected, (state, action) => {
         state.commentsLoading = false;
         state.failedToLoadComments = true;
+
+        state.commentsError = action.error.message;
       });
   },
 });
@@ -56,5 +59,9 @@ const commentsSlice = createSlice({
 // selectors
 export const selectComments = (state) => state.comments.comments;
 export const commentsLoading = (state) => state.comments.commentsLoading;
+export const selectFailedToLoadComments = (state) =>
+  state.comments.failedToLoadComments;
+export const selectCommentsError = (state) => state.comments.commentsLoading;
+
 //reducer
 export default commentsSlice.reducer;
