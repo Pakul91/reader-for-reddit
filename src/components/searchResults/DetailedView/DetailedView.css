@@ -189,11 +189,11 @@ Clickable items : orangered / rgba(255,69,0,1)
   .details-container {
     left: 1%;
     width: 98%;
-    border: 1px solid red;
   }
 }
 
 @media screen and (max-width: 480px) {
+  /* anabling flexible size of embeded video */
   .embeded-post {
     display: flex;
     max-width: 98%;
@@ -203,7 +203,7 @@ Clickable items : orangered / rgba(255,69,0,1)
     display: flex;
     flex-shrink: 1 1;
   }
-
+  /* seting oryginal content link back to statick and reversing it so the text is on the right */
   .link-oryginal {
     position: static;
     flex-direction: row-reverse;
