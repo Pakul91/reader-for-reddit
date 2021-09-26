@@ -87,6 +87,7 @@ main {
   /* Remove short-name from the header */
   /* Change padding for QuickAccesBtns  */
   /* Change the with of the search bar */
+  /* Change media display and text in detailed view */
 }
 @media screen and (max-width: 400px) {
   html,

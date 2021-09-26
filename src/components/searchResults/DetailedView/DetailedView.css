@@ -189,5 +189,23 @@ Clickable items : orangered / rgba(255,69,0,1)
   .details-container {
     left: 1%;
     width: 98%;
+    border: 1px solid red;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .embeded-post {
+    display: flex;
+    max-width: 98%;
+  }
+
+  .embeded-post div {
+    display: flex;
+    flex-shrink: 1 1;
+  }
+
+  .link-oryginal {
+    position: static;
+    flex-direction: row-reverse;
   }
 }

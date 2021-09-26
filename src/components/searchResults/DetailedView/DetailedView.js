@@ -99,9 +99,12 @@ export function DetailedView({ post }) {
           )}
 
           {/* Display embeded video if there is any */}
+
           <div
             className="embeded-post"
-            dangerouslySetInnerHTML={{ __html: formatEmbeded(post.embededVid) }}
+            dangerouslySetInnerHTML={{
+              __html: formatEmbeded(post.embededVid),
+            }}
           ></div>
 
           {/* insert previously formated text */}
