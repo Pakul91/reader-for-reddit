@@ -1,5 +1,6 @@
 import { React, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import "./reset.css";
 import "./App.css";
@@ -16,13 +17,15 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="app-container">
-      <Header />
-      <main>
-        <SearchResults />
-        <SubredditsPanel />
-      </main>
-    </div>
+    <Router>
+      <div className="app-container">
+        <Header />
+        <main>
+          <SearchResults />
+          <SubredditsPanel />
+        </main>
+      </div>
+    </Router>
   );
 }
 

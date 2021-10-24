@@ -1,25 +1,18 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 //Files media and components
 import "./SearchResults.css";
 import textIcon from "../../media/textIcon.png";
 import { DetailedView } from "./DetailedView/DetailedView";
 // Functions
 import { formatTime, formatNumber } from "../../Helpers/HELPERS";
-import { toggleDatailedViewById } from "./searchResultsSlice";
+import { Link, Route } from "react-router-dom";
 
 //======================================
 
 export function PostSearchResult({ post }) {
-  const dispatch = useDispatch();
-
-  const handleClick = () => {
-    dispatch(toggleDatailedViewById(post.id));
-  };
-
   return (
     <div>
-      <div className="postSearchResult-container" onClick={handleClick}>
+      <Link to={`/${post.id}`} className="postSearchResult-container">
         <div className="ups">{formatNumber(post.ups)}</div>
         <div className="thumbnail-container">
           <img
@@ -38,8 +31,10 @@ export function PostSearchResult({ post }) {
             <span className="date-stamp"> {formatTime(post)} ago.</span>
           </div>
         </div>
-      </div>
-      {post.detailedView && <DetailedView post={post} />}
+      </Link>
+      <Route path={`/${post.id}`}>
+        <DetailedView post={post} />
+      </Route>
     </div>
   );
 }

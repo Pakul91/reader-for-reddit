@@ -3,7 +3,6 @@ import "./DetailedView.css";
 import linkIcon from "../../../media/linkIcon.png";
 import commentsIcon from "../../../media/commentsIcon.png";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleDatailedViewById } from "../searchResultsSlice";
 import {
   loadComments,
   selectComments,
@@ -20,11 +19,13 @@ import {
 import { markdown } from "../../../Helpers/drawdown";
 import { Comment } from "./Comments/Comment";
 import { ErrorBox } from "../../ErrorBox/ErrorBox";
+import { useHistory } from "react-router-dom";
 
 //===========================================
 
 export function DetailedView({ post }) {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [commentsActive, setCommentsActive] = useState(false);
   //Check if comments failed to load
@@ -32,7 +33,9 @@ export function DetailedView({ post }) {
   //Error msg if error
   const commentsError = useSelector(selectCommentsError);
   //Turn detailed view off when clicked  X button
-  const handleClick = () => [dispatch(toggleDatailedViewById(post.id))];
+  const handleClick = () => {
+    history.push("/");
+  };
   //Toggle coments on/off
   const toggleComments = (e) => {
     e.stopPropagation();
@@ -54,16 +57,18 @@ export function DetailedView({ post }) {
   useEffect(() => {
     //check if there are comments for this post in the state
     if (!commentsById) dispatch(loadComments(post));
+
     //close detailed view when press escape
     const handleEscPress = (e) => {
-      dispatch(toggleDatailedViewById(post.id));
+      history.push("/");
     };
+
     document.addEventListener("keydown", handleEscPress);
     //clearing event listener on dismount
     return () => {
       document.removeEventListener("keydown", handleEscPress);
     };
-  }, [dispatch, post, commentsById]);
+  }, [history, dispatch, post, commentsById]);
 
   return (
     <div>

@@ -24,6 +24,8 @@ Color for shadows: #BAB8BA
 
 /* Styles for rendering POSTS */
 .postSearchResult-container {
+  text-decoration: none;
+  color: inherit;
   display: flex;
   height: 6rem;
   background-color: #f9f7fa;
