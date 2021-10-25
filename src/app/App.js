@@ -1,6 +1,6 @@
 import { React, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import "./reset.css";
 import "./App.css";
@@ -12,20 +12,21 @@ import { loadPosts } from "../components/searchResults/searchResultsSlice";
 
 function App() {
   const dispatch = useDispatch();
+  const history = useHistory();
+
   useEffect(() => {
+    history.push("/posts");
     dispatch(loadPosts({ term: "hot", type: "category" }));
-  }, [dispatch]);
+  }, [history, dispatch]);
 
   return (
-    <Router>
-      <div className="app-container">
-        <Header />
-        <main>
-          <SearchResults />
-          <SubredditsPanel />
-        </main>
-      </div>
-    </Router>
+    <div className="app-container">
+      <Header />
+      <main>
+        <SearchResults />
+        <SubredditsPanel />
+      </main>
+    </div>
   );
 }
 

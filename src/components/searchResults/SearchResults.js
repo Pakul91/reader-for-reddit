@@ -1,92 +1,79 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Route } from "react-router-dom";
+
 import { PostSearchResult } from "./PostSearchResult";
 import { SubredditSearchResult } from "./SubredditSearchResult";
-import {
-  selectPostsButtonStatus,
-  selectSubredditsButtonStatus,
-} from "../QuickAccessBar/quickAccessBarSlice";
+import {} from "../QuickAccessBar/quickAccessBarSlice";
 import { LoadingSpinner } from "../loadingSpinner/LoadingSpinner";
 import {
   selectSearchTerm,
   selectSearchedPosts,
-  selectIsLoadingPosts,
-  selectFailedToLoadPosts,
-  selectPostsError,
   selectSearchedSubreddits,
-  selectIsLoadingSubreddits,
-  selectFailedToLoadSubreddits,
-  selectSubredditsError,
+  selectLoadingData,
+  selectFailedToLoadData,
+  selectDataError,
 } from "./searchResultsSlice";
 import "./SearchResults.css";
 import { QuickAccessBar } from "../QuickAccessBar/QuickAccessBar";
 import { ErrorBox } from "../ErrorBox/ErrorBox";
 
 export function SearchResults() {
-  //Search term selector
   const searchTerm = useSelector(selectSearchTerm);
-  //Posts selectors
   const posts = useSelector(selectSearchedPosts);
-  const postsLoading = useSelector(selectIsLoadingPosts);
-  const postsActive = useSelector(selectPostsButtonStatus);
-  const failedToLoadPosts = useSelector(selectFailedToLoadPosts);
-  const postsErrorMsg = useSelector(selectPostsError);
-  const displayPosts = !postsLoading && !failedToLoadPosts && postsActive;
-  //Subreddits selectors
   const subreddits = useSelector(selectSearchedSubreddits);
-  const subredditsLoading = useSelector(selectIsLoadingSubreddits);
-  const subredditsActive = useSelector(selectSubredditsButtonStatus);
-  const failedToLoadSubreddits = useSelector(selectFailedToLoadSubreddits);
-  const subredditsErrorMsg = useSelector(selectSubredditsError);
-  const displaySubreddits =
-    !subredditsLoading && !failedToLoadSubreddits && subredditsActive;
+  const loadingData = useSelector(selectLoadingData);
+  const failedToLoadData = useSelector(selectFailedToLoadData);
+  const dataError = useSelector(selectDataError);
+
+  if (loadingData) {
+    return (
+      <div className="searchResults-container">
+        <QuickAccessBar />
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  if (failedToLoadData) {
+    return (
+      <div className="searchResults-container">
+        <QuickAccessBar />
+        <ErrorBox error={dataError} />
+      </div>
+    );
+  }
 
   return (
     <div className="searchResults-container">
-      {!postsLoading && <QuickAccessBar />}
+      <QuickAccessBar />
 
-      {/* -----------POSTS----------- */}
-      {/* Load error msg if not loading and error */}
-      {postsActive && !postsLoading && failedToLoadPosts && (
-        <ErrorBox error={postsErrorMsg} />
-      )}
-      {/* If loading render spinner */}
-      {postsLoading && <LoadingSpinner />}
-      {/* When subreddits button selected and searchTerm provided  display label with search term */}
-      {displayPosts && searchTerm && (
-        <div className="search-term-display">
-          <p>
-            Posts for: <span>'{searchTerm}'</span>
-          </p>
-        </div>
-      )}
-      {/* Reder posts if coditions met*/}
-      {displayPosts &&
-        Object.values(posts).map((post) => {
+      <Route path="/posts">
+        {searchTerm && (
+          <div className="search-term-display">
+            <p>
+              Posts for: <span>'{searchTerm}'</span>
+            </p>
+          </div>
+        )}
+        {Object.values(posts).map((post) => {
           return <PostSearchResult key={post.id} post={post} />;
         })}
-
+      </Route>
       {/* -----------SUBREDDITS----------- */}
-      {/* When subreddits button selected and searchTerm provided display label with search term */}
-      {/* Load error msg if not loading and error */}
-      {subredditsActive && !subredditsLoading && failedToLoadPosts && (
-        <ErrorBox error={subredditsErrorMsg} />
-      )}
-      {displaySubreddits && (
+
+      <Route path="/subreddits">
         <div className="search-term-display">
           <p>
             Subreddits for: <span>'{searchTerm}'</span>
           </p>
         </div>
-      )}
-      {/* Reder subreddits if conditions met*/}
-      {displaySubreddits &&
-        searchTerm &&
-        Object.values(subreddits).map((subreddit) => {
+        {Object.values(subreddits).map((subreddit) => {
           return (
             <SubredditSearchResult key={subreddit.id} subreddit={subreddit} />
           );
         })}
+      </Route>
     </div>
   );
 }

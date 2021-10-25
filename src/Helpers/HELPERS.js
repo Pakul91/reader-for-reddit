@@ -41,7 +41,6 @@ export const formatPosts = ({ data }) => {
         imgURL: data.url,
         permalink: data.permalink,
         text: data.selftext,
-        detailedView: false,
         // conditinally adding property:
         ...(data.media &&
           data.media.reddit_video && {

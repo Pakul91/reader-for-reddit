@@ -34,7 +34,7 @@ export function DetailedView({ post }) {
   const commentsError = useSelector(selectCommentsError);
   //Turn detailed view off when clicked  X button
   const handleClick = () => {
-    history.push("/");
+    history.push("/posts");
   };
   //Toggle coments on/off
   const toggleComments = (e) => {
@@ -60,7 +60,7 @@ export function DetailedView({ post }) {
 
     //close detailed view when press escape
     const handleEscPress = (e) => {
-      history.push("/");
+      history.push("/posts");
     };
 
     document.addEventListener("keydown", handleEscPress);

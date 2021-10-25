@@ -3,10 +3,12 @@ import "./QuickAccessBar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectButtons, toggleContent } from "./quickAccessBarSlice";
 import { applyStyleByStatus } from "../../Helpers/HELPERS";
+import { useHistory } from "react-router-dom";
 
 export function ContentBtn({ button }) {
   const dispatch = useDispatch();
   const buttons = useSelector(selectButtons);
+  const history = useHistory();
 
   // Apply css selector by buttons status
   const style = applyStyleByStatus(buttons, button.id);
@@ -18,7 +20,9 @@ export function ContentBtn({ button }) {
     if (buttons[button.id].selected || buttons[button.id].disabled) return;
     //Toggle status between content buttons
     dispatch(toggleContent());
+    history.push(`/${button.id}`);
   };
+
   return (
     <button
       onClick={handleContentBtnClick}

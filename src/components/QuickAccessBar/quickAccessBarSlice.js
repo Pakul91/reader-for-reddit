@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { loadPosts } from "../searchResults/searchResultsSlice";
+import { setAllInactive } from "../subredditsPanel/subredditsSlice";
+import { clearData, setSearchTerm } from "../searchResults/searchResultsSlice";
 
 /**
  *
@@ -13,6 +15,8 @@ export const quickAccessBtnClick = ({ buttons, buttonId }) => {
 
     // if already selected or  disabled return
     if (buttons[id].selected || buttons[id].disabled) return;
+    // Set all featuredSubreddits to inactive state
+    dispatch(setAllInactive());
     //Unselect all
     dispatch(setAllToUnselected());
     //Select clicked button
@@ -21,8 +25,12 @@ export const quickAccessBtnClick = ({ buttons, buttonId }) => {
     dispatch(setToSelectedById("posts"));
     //Set subreddits to disabled
     dispatch(setToDisabledById("subreddits"));
+    //Clear previos search results
+    dispatch(clearData());
     //load search results for given category
     dispatch(loadPosts({ term: id, type: "category" }));
+    //Set search term to empty string
+    dispatch(setSearchTerm(buttonId));
   };
 };
 

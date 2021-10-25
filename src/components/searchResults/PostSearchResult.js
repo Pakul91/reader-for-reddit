@@ -12,7 +12,7 @@ import { Link, Route } from "react-router-dom";
 export function PostSearchResult({ post }) {
   return (
     <div>
-      <Link to={`/${post.id}`} className="postSearchResult-container">
+      <Link to={`/posts/${post.id}`} className="postSearchResult-container">
         <div className="ups">{formatNumber(post.ups)}</div>
         <div className="thumbnail-container">
           <img
@@ -32,7 +32,7 @@ export function PostSearchResult({ post }) {
           </div>
         </div>
       </Link>
-      <Route path={`/${post.id}`}>
+      <Route path={`/posts/${post.id}`}>
         <DetailedView post={post} />
       </Route>
     </div>
