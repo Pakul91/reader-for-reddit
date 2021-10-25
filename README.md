@@ -14,7 +14,7 @@ Reader for Reddit is a simple web app allowing users to search for interesting t
 * CSS 3
 * React 17.0.2
 * React-redux 7.2.3
-* React-router 
+* React-router-dom 5.3.0
 * Reddit JSON API
 
 
