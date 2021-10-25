@@ -10,8 +10,10 @@ import {
   selectSearchedPosts,
   selectSearchedSubreddits,
   selectLoadingData,
-  selectFailedToLoadData,
-  selectDataError,
+  selectFailedToLoadPosts,
+  selectFailedToLoadSubreddits,
+  selectPostsError,
+  selectSubredditsError,
 } from "./searchResultsSlice";
 import "./SearchResults.css";
 import { QuickAccessBar } from "../QuickAccessBar/QuickAccessBar";
@@ -22,8 +24,10 @@ export function SearchResults() {
   const posts = useSelector(selectSearchedPosts);
   const subreddits = useSelector(selectSearchedSubreddits);
   const loadingData = useSelector(selectLoadingData);
-  const failedToLoadData = useSelector(selectFailedToLoadData);
-  const dataError = useSelector(selectDataError);
+  const failedToLoadSubreddits = useSelector(selectFailedToLoadSubreddits);
+  const failedToLoadPosts = useSelector(selectFailedToLoadPosts);
+  const postsError = useSelector(selectPostsError);
+  const subredditsError = useSelector(selectSubredditsError);
 
   if (loadingData) {
     return (
@@ -34,45 +38,61 @@ export function SearchResults() {
     );
   }
 
-  if (failedToLoadData) {
-    return (
-      <div className="searchResults-container">
-        <QuickAccessBar />
-        <ErrorBox error={dataError} />
-      </div>
-    );
-  }
+  const postsContent = () => {
+    if (failedToLoadPosts) {
+      return (
+        <Route path="/posts">
+          <ErrorBox error={postsError} />
+        </Route>
+      );
+    } else {
+      return (
+        <Route path="/posts">
+          {searchTerm && (
+            <div className="search-term-display">
+              <p>
+                Posts for: <span>'{searchTerm}'</span>
+              </p>
+            </div>
+          )}
+          {Object.values(posts).map((post) => {
+            return <PostSearchResult key={post.id} post={post} />;
+          })}
+        </Route>
+      );
+    }
+  };
+
+  const subredditsContent = () => {
+    if (failedToLoadSubreddits) {
+      return (
+        <Route path="/subreddits">
+          <ErrorBox error={subredditsError} />
+        </Route>
+      );
+    } else {
+      return (
+        <Route path="/subreddits">
+          <div className="search-term-display">
+            <p>
+              Subreddits for: <span>'{searchTerm}'</span>
+            </p>
+          </div>
+          {Object.values(subreddits).map((subreddit) => {
+            return (
+              <SubredditSearchResult key={subreddit.id} subreddit={subreddit} />
+            );
+          })}
+        </Route>
+      );
+    }
+  };
 
   return (
     <div className="searchResults-container">
       <QuickAccessBar />
-
-      <Route path="/posts">
-        {searchTerm && (
-          <div className="search-term-display">
-            <p>
-              Posts for: <span>'{searchTerm}'</span>
-            </p>
-          </div>
-        )}
-        {Object.values(posts).map((post) => {
-          return <PostSearchResult key={post.id} post={post} />;
-        })}
-      </Route>
-      {/* -----------SUBREDDITS----------- */}
-
-      <Route path="/subreddits">
-        <div className="search-term-display">
-          <p>
-            Subreddits for: <span>'{searchTerm}'</span>
-          </p>
-        </div>
-        {Object.values(subreddits).map((subreddit) => {
-          return (
-            <SubredditSearchResult key={subreddit.id} subreddit={subreddit} />
-          );
-        })}
-      </Route>
+      {postsContent()}
+      {subredditsContent()}
     </div>
   );
 }

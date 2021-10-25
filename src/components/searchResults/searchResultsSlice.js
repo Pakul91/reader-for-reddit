@@ -87,7 +87,9 @@ export const loadSubreddits = createAsyncThunk(
 
     const subreddits = await fetchData(endpoint);
 
-    if (subreddits.data.children.length === 0)
+    console.log(subreddits);
+
+    if (!subreddits.data || subreddits.data.children.length === 0)
       throw new Error(`Couldn't find any subreddits for '${term}'`);
 
     return formatSubreddits(subreddits);
@@ -119,8 +121,10 @@ const searchResultsSlice = createSlice({
     searchTerm: "",
 
     loadingData: false,
-    failedToLoadData: false,
-    dataError: "",
+    failedToLoadPosts: false,
+    failedToLoadSubreddits: false,
+    postsError: "",
+    subredditsError: "",
   },
   reducers: {
     //Store search term
@@ -138,43 +142,49 @@ const searchResultsSlice = createSlice({
     builder
       .addCase(loadPosts.pending, (state) => {
         state.loadingData = true;
-        state.failedToLoadData = false;
+        state.failedToLoadPosts = false;
       })
       .addCase(loadPosts.fulfilled, (state, action) => {
         state.loadingData = false;
-        state.failedToLoadData = false;
+        state.failedToLoadPosts = false;
         state.posts = action.payload;
       })
       .addCase(loadPosts.rejected, (state, action) => {
         state.loadingData = false;
-        state.failedToLoadData = true;
-        state.dataError = action.error.message;
+        state.failedToLoadPosts = true;
+        state.postsError = action.error.message;
       })
       .addCase(loadSubreddits.pending, (state) => {
         state.loadingData = true;
-        state.failedToLoadData = false;
+        state.failedToLoadSubreddits = false;
       })
       .addCase(loadSubreddits.fulfilled, (state, action) => {
         state.loadingData = false;
-        state.failedToLoadData = false;
+        state.failedToLoadSubreddits = false;
         state.subreddits = action.payload;
       })
       .addCase(loadSubreddits.rejected, (state, action) => {
         state.loadingData = false;
-        state.failedToLoadData = true;
-        state.dataError = action.error.message;
+        state.failedToLoadSubreddits = true;
+        state.subredditsError = action.error.message;
       });
   },
 });
 
 export const selectSearchTerm = (state) => state.searchResults.searchTerm;
+export const selectLoadingData = (state) => state.searchResults.loadingData;
+
 export const selectSearchedPosts = (state) => state.searchResults.posts;
+export const selectFailedToLoadPosts = (state) =>
+  state.searchResults.failedToLoadPosts;
+export const selectPostsError = (state) => state.searchResults.postsError;
+
 export const selectSearchedSubreddits = (state) =>
   state.searchResults.subreddits;
-export const selectLoadingData = (state) => state.searchResults.loadingData;
-export const selectFailedToLoadData = (state) =>
-  state.searchResults.failedToLoadData;
-export const selectDataError = (state) => state.searchResults.dataError;
+export const selectFailedToLoadSubreddits = (state) =>
+  state.searchResults.failedToLoadSubreddits;
+export const selectSubredditsError = (state) =>
+  state.searchResults.subredditsError;
 
 //Action creators exports
 export const { toggleDatailedViewById, setSearchTerm, clearData } =
