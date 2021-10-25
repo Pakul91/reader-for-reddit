@@ -70,6 +70,7 @@ main {
   /* Change featured subreddits panel properties to create scroll in x */
   /* Change width of detailed view  */
   /* Change margins for search results */
+  /* Change box shadows for Header, QuickAccessBar, SubredditsPanel, PostSearchResult, SubredditSearchResult */
 }
 
 @media screen and (max-width: 560px) {

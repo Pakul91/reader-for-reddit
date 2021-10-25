@@ -14,9 +14,11 @@ import {
 } from "../QuickAccessBar/quickAccessBarSlice";
 import { setAllInactive } from "../subredditsPanel/subredditsSlice";
 import { media } from "../../media/media";
+import { useHistory } from "react-router-dom";
 
 export function SearchBar() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [term, setTerm] = useState("");
 
   //When hit ender or press search button
@@ -42,6 +44,7 @@ export function SearchBar() {
     dispatch(setAllInactive());
     //Clear serch bar
     setTerm("");
+    history.push("/posts");
   }
 
   return (

@@ -1,5 +1,36 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { media } from "../../media/media";
+import {
+  clearData,
+  loadPosts,
+  setSearchTerm,
+} from "../searchResults/searchResultsSlice";
+import {
+  setAllToUnselected,
+  setToSelectedById,
+  setToDisabledById,
+} from "../QuickAccessBar/quickAccessBarSlice";
+
+export const featuredSubredditClick = (subreddit) => {
+  return (dispatch) => {
+    //Clear previos search results
+    dispatch(clearData());
+    //set all featured subreddits to inactive state
+    dispatch(setAllInactive());
+    //set serarch term to 'r/' prefixed subreddit name
+    dispatch(setSearchTerm(`r/${subreddit.name}`));
+    //set selected subreddit state to active
+    dispatch(setActiveById(subreddit.id));
+    //load subreddit posts
+    dispatch(loadPosts({ term: subreddit.name, type: "subredditPosts" }));
+    //set all quick access bar buttons to inactive
+    dispatch(setAllToUnselected());
+    //select Posts button to view posts
+    dispatch(setToSelectedById("posts"));
+    //set subreddits button state to disabled
+    dispatch(setToDisabledById("subreddits"));
+  };
+};
 
 const subredditsSlice = createSlice({
   name: "subreddits",

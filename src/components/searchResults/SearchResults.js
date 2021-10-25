@@ -4,7 +4,6 @@ import { Route } from "react-router-dom";
 
 import { PostSearchResult } from "./PostSearchResult";
 import { SubredditSearchResult } from "./SubredditSearchResult";
-import {} from "../QuickAccessBar/quickAccessBarSlice";
 import { LoadingSpinner } from "../loadingSpinner/LoadingSpinner";
 import {
   selectSearchTerm,

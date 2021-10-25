@@ -1,33 +1,17 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { formatNumber } from "../../Helpers/HELPERS";
 import { media } from "../../media/media";
-import {
-  setAllInactive,
-  setActiveById,
-} from "../subredditsPanel/subredditsSlice";
-import { loadPosts, setSearchTerm } from "./searchResultsSlice";
-import {
-  toggleContent,
-  setToDisabledById,
-} from "../QuickAccessBar/quickAccessBarSlice";
+import { subredditClick } from "./searchResultsSlice";
 
 export function SubredditSearchResult({ subreddit }) {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleClick = () => {
-    //set all featured subreddits to inactive state
-    dispatch(setAllInactive());
-    //if clicked Subreddit ID is among featured subreddits, select its status to active
-    dispatch(setActiveById(subreddit.id));
-    //set serarch term to 'r/' prefixed subreddit name
-    dispatch(setSearchTerm(`r/${subreddit.name}`));
-    //load subredit posts
-    dispatch(loadPosts({ term: subreddit.name, type: "subredditPosts" }));
-    //activate posts button
-    dispatch(toggleContent());
-    //set subreddits button state to disabled
-    dispatch(setToDisabledById("subreddits"));
+    dispatch(subredditClick(subreddit));
+    history.push("/posts");
   };
 
   return (

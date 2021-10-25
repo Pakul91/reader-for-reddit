@@ -151,15 +151,17 @@ Color for shadows: #BAB8BA
 @media screen and (max-width: 700px) {
   .searchResults-container {
     margin: 0.5rem auto;
-    max-width: 100%;
+    width: 100%;
   }
 
   .postSearchResult-container {
     margin: 0 auto 0.5rem auto;
+    box-shadow: 0 0.25rem 0.2rem #bab8ba;
   }
   .subredditSearchResult-container {
     margin: 0 auto 0.3rem auto;
     max-width: 100%;
+    box-shadow: 0 0.15rem 0.2rem #bab8ba;
   }
 
   .description-container {
@@ -182,6 +184,10 @@ Color for shadows: #BAB8BA
     flex-shrink: 0;
     width: 7rem;
     font-size: 0.5rem;
+  }
+
+  .search-term-display {
+    box-shadow: 0 0.25rem 0.2rem #bab8ba;
   }
 }
 
