@@ -5,10 +5,17 @@
 
 ## General info
 
+Reader for Reddit is a simple web app allowing users to search for interesting topics or communities on Reddit, scroll through the content, see a detailed view of posts, and check comments. App built to practice using React functional components in conjunction with React Router and Redux Toolkit. 
+
 ## Technologies
 
-
-
+* JavaScript
+* Html 5
+* CSS 3
+* React 17.0.2
+* React-redux 7.2.3
+* React-router 
+* Reddit JSON API
 
 
 ## Setup
@@ -29,6 +36,7 @@ You will also see any lint errors in the console.
 
 ##### `npm test`
 
+(No test available yet)
 Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
